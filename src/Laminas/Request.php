@@ -1,17 +1,16 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @see       http://github.com/zendframework/zend-diactoros for the canonical source repository
- * @copyright Copyright (c) 2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   https://github.com/zendframework/zend-diactoros/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/laminas/laminas-psr7bridge for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-psr7bridge/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-psr7bridge/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\Psr7Bridge\Zend;
+namespace Laminas\Psr7Bridge\Laminas;
 
-use Zend\Http\Header\Cookie;
-use Zend\Http\PhpEnvironment\Request as BaseRequest;
-use Zend\Stdlib\Parameters;
+use Laminas\Http\Header\Cookie;
+use Laminas\Http\PhpEnvironment\Request as BaseRequest;
+use Laminas\Stdlib\Parameters;
 
 class Request extends BaseRequest
 {
