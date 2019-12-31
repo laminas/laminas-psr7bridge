@@ -1,5 +1,5 @@
 {
-  "title": "zend-psr7bridge: PSR-7 <-> zend-http message conversion",
+  "title": "laminas-psr7bridge: PSR-7 <-> laminas-http message conversion",
   "content": [
     "book/index.md",
     "book/install.md",

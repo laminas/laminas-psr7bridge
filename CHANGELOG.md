@@ -8,11 +8,11 @@ Initial release!
 
 ### Added
 
-- `Zend\Psr7Bridge\Psr7ServerRequest::toZend($request, $shallow = false)` allows
+- `Laminas\Psr7Bridge\Psr7ServerRequest::toLaminas($request, $shallow = false)` allows
   converting a `Psr\Http\Message\ServerRequestInterface` to a
-  `Zend\Http\PhpEnvironment\Request` instance. The `$shallow` flag, when
+  `Laminas\Http\PhpEnvironment\Request` instance. The `$shallow` flag, when
   enabled, will omit the body content, body parameters, and upload files from
-  the zend-http request (e.g., for routing purposes).
+  the laminas-http request (e.g., for routing purposes).
 
 ### Deprecated
 
