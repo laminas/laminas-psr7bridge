@@ -1,19 +1,20 @@
 <?php
+
 /**
- * @see       http://github.com/zendframework/zend-psr7bridge for the canonical source repository
- * @copyright Copyright (c) 2015-2017 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   https://github.com/zendframework/zend-psr7bridge/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/laminas/laminas-psr7bridge for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-psr7bridge/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-psr7bridge/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\Psr7Bridge;
+namespace LaminasTest\Psr7Bridge;
 
 use Error;
+use Laminas\Diactoros\Response;
+use Laminas\Diactoros\Stream;
+use Laminas\Http\Response as LaminasResponse;
+use Laminas\Psr7Bridge\Psr7Response;
 use PHPUnit\Framework\TestCase as TestCase;
 use Psr\Http\Message\ResponseInterface;
-use Zend\Diactoros\Response;
-use Zend\Diactoros\Stream;
-use Zend\Http\Response as ZendResponse;
-use Zend\Psr7Bridge\Psr7Response;
 
 class Psr7ResponseTest extends TestCase
 {
@@ -36,7 +37,7 @@ class Psr7ResponseTest extends TestCase
     /**
      * @dataProvider getResponseData
      */
-    public function testResponseToZend($body, $status, $headers)
+    public function testResponseToLaminas($body, $status, $headers)
     {
         $stream = new Stream('php://temp', 'wb+');
         $stream->write($body);
@@ -44,15 +45,15 @@ class Psr7ResponseTest extends TestCase
         $psr7Response = new Response($stream, $status, $headers);
         $this->assertInstanceOf(ResponseInterface::class, $psr7Response);
 
-        $zendResponse = Psr7Response::toZend($psr7Response);
-        $this->assertInstanceOf(ZendResponse::class, $zendResponse);
-        $this->assertEquals($body, (string)$zendResponse->getBody());
-        $this->assertEquals($status, $zendResponse->getStatusCode());
+        $laminasResponse = Psr7Response::toLaminas($psr7Response);
+        $this->assertInstanceOf(LaminasResponse::class, $laminasResponse);
+        $this->assertEquals($body, (string)$laminasResponse->getBody());
+        $this->assertEquals($status, $laminasResponse->getStatusCode());
 
-        $zendHeaders = $zendResponse->getHeaders()->toArray();
+        $laminasHeaders = $laminasResponse->getHeaders()->toArray();
         foreach ($headers as $type => $values) {
             foreach ($values as $value) {
-                $this->assertContains($value, $zendHeaders[$type]);
+                $this->assertContains($value, $laminasHeaders[$type]);
             }
         }
     }
@@ -60,7 +61,7 @@ class Psr7ResponseTest extends TestCase
     /**
      * @dataProvider getResponseData
      */
-    public function testResponseToZendWithMemoryStream($body, $status, $headers)
+    public function testResponseToLaminasWithMemoryStream($body, $status, $headers)
     {
         $stream = new Stream('php://memory', 'wb+');
         $stream->write($body);
@@ -68,15 +69,15 @@ class Psr7ResponseTest extends TestCase
         $psr7Response = new Response($stream, $status, $headers);
         $this->assertInstanceOf(ResponseInterface::class, $psr7Response);
 
-        $zendResponse = Psr7Response::toZend($psr7Response);
-        $this->assertInstanceOf(ZendResponse::class, $zendResponse);
-        $this->assertEquals($body, (string)$zendResponse->getBody());
-        $this->assertEquals($status, $zendResponse->getStatusCode());
+        $laminasResponse = Psr7Response::toLaminas($psr7Response);
+        $this->assertInstanceOf(LaminasResponse::class, $laminasResponse);
+        $this->assertEquals($body, (string)$laminasResponse->getBody());
+        $this->assertEquals($status, $laminasResponse->getStatusCode());
 
-        $zendHeaders = $zendResponse->getHeaders()->toArray();
+        $laminasHeaders = $laminasResponse->getHeaders()->toArray();
         foreach ($headers as $type => $values) {
             foreach ($values as $value) {
-                $this->assertContains($value, $zendHeaders[$type]);
+                $this->assertContains($value, $laminasHeaders[$type]);
             }
         }
     }
@@ -84,7 +85,7 @@ class Psr7ResponseTest extends TestCase
     /**
      * @dataProvider getResponseData
      */
-    public function testResponseToZendFromRealStream($body, $status, $headers)
+    public function testResponseToLaminasFromRealStream($body, $status, $headers)
     {
         $stream = new Stream(tempnam(sys_get_temp_dir(), 'Test'), 'wb+');
         $stream->write($body);
@@ -92,15 +93,15 @@ class Psr7ResponseTest extends TestCase
         $psr7Response = new Response($stream, $status, $headers);
         $this->assertInstanceOf(ResponseInterface::class, $psr7Response);
 
-        $zendResponse = Psr7Response::toZend($psr7Response);
-        $this->assertInstanceOf(ZendResponse::class, $zendResponse);
-        $this->assertEquals($body, (string)$zendResponse->getBody());
-        $this->assertEquals($status, $zendResponse->getStatusCode());
+        $laminasResponse = Psr7Response::toLaminas($psr7Response);
+        $this->assertInstanceOf(LaminasResponse::class, $laminasResponse);
+        $this->assertEquals($body, (string)$laminasResponse->getBody());
+        $this->assertEquals($status, $laminasResponse->getStatusCode());
 
-        $zendHeaders = $zendResponse->getHeaders()->toArray();
+        $laminasHeaders = $laminasResponse->getHeaders()->toArray();
         foreach ($headers as $type => $values) {
             foreach ($values as $value) {
-                $this->assertContains($value, $zendHeaders[$type]);
+                $this->assertContains($value, $laminasHeaders[$type]);
             }
         }
     }
@@ -118,19 +119,19 @@ class Psr7ResponseTest extends TestCase
     /**
      * @dataProvider getResponseString
      */
-    public function testResponseFromZend($response)
+    public function testResponseFromLaminas($response)
     {
-        $zendResponse = ZendResponse::fromString($response);
-        $this->assertInstanceOf(ZendResponse::class, $zendResponse);
-        $psr7Response = Psr7Response::fromZend($zendResponse);
+        $laminasResponse = LaminasResponse::fromString($response);
+        $this->assertInstanceOf(LaminasResponse::class, $laminasResponse);
+        $psr7Response = Psr7Response::fromLaminas($laminasResponse);
         $this->assertInstanceOf(ResponseInterface::class, $psr7Response);
-        $this->assertEquals((string)$psr7Response->getBody(), $zendResponse->getBody());
-        $this->assertEquals($psr7Response->getStatusCode(), $zendResponse->getStatusCode());
+        $this->assertEquals((string)$psr7Response->getBody(), $laminasResponse->getBody());
+        $this->assertEquals($psr7Response->getStatusCode(), $laminasResponse->getStatusCode());
 
-        $zendHeaders = $zendResponse->getHeaders()->toArray();
+        $laminasHeaders = $laminasResponse->getHeaders()->toArray();
         foreach ($psr7Response->getHeaders() as $type => $values) {
             foreach ($values as $value) {
-                $this->assertContains($value, $zendHeaders[$type]);
+                $this->assertContains($value, $laminasHeaders[$type]);
             }
         }
     }
