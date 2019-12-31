@@ -1,24 +1,24 @@
-# zend-psr7bridge
+# laminas-psr7bridge
 
-[![Build Status](https://secure.travis-ci.org/zendframework/zend-psr7bridge.svg?branch=master)](https://secure.travis-ci.org/zendframework/zend-psr7bridge)
+[![Build Status](https://travis-ci.org/laminas/laminas-psr7bridge.svg?branch=master)](https://travis-ci.org/laminas/laminas-psr7bridge)
 
 Code for converting [PSR-7](http://www.php-fig.org/psr/psr-7/) messages to
-[zend-http](https://github.com/zendframework/zend-http) messages, and vice
+[laminas-http](https://github.com/laminas/laminas-http) messages, and vice
 versa.
 
 **Note: This project is a work in progress.**
 
 Initial functionality is only covering conversion of non-body request data from
-PSR-7 to zend-http in order to facilitate routing in
-[zend-expressive](https://github.com/zendframework/zend-expressive); we plan to
-expand this once initial work on zend-expressive is complete.
+PSR-7 to laminas-http in order to facilitate routing in
+[mezzio](https://github.com/mezzio/mezzio); we plan to
+expand this once initial work on mezzio is complete.
 
 ## Installation
 
 Install this library using composer:
 
 ```console
-$ composer require zendframework/zend-psr7bridge
+$ composer require laminas/laminas-psr7bridge
 ```
 
 ## Documentation
