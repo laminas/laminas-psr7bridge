@@ -1,12 +1,12 @@
 # Usage
 
-## Converting a PSR-7 ServerRequestInterface to a Zend\Http\PhpEnvironment\Request
+## Converting a PSR-7 ServerRequestInterface to a Laminas\Http\PhpEnvironment\Request
 
 The PSR-7 [ServerRequestInterface](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-7-http-message.md#321-psrhttpmessageserverrequestinterface) 
-corresponds to the zend-http [PhpEnvironment\Request](https://github.com/zendframework/zend-http/blob/master/src/PhpEnvironment/Request.php).
+corresponds to the laminas-http [PhpEnvironment\Request](https://github.com/laminas/laminas-http/blob/master/src/PhpEnvironment/Request.php).
 
-To convert from a PSR-7 instance to a zend-http instance, use
-`Zend\Psr7Bridge\Psr7ServerRequest::toZend()`. This method takes up to two
+To convert from a PSR-7 instance to a laminas-http instance, use
+`Laminas\Psr7Bridge\Psr7ServerRequest::toLaminas()`. This method takes up to two
 arguments:
 
 - the `ServerRequestInterface` instance to convert.
@@ -14,7 +14,7 @@ arguments:
 
 *Shallow conversions* omit:
 
-- body parameters ("post" in zend-http)
+- body parameters ("post" in laminas-http)
 - uploaded files
 - the body content
 
@@ -24,24 +24,24 @@ not need this more process-intensive data. By default, the `$shallow` flag is
 
 ## Examples
 
-### Full conversion to zend-http request
+### Full conversion to laminas-http request
 
 ```php
-use Zend\Http\PhpEnvironment\Response;
-use Zend\Psr7Bridge\Psr7ServerRequest;
+use Laminas\Http\PhpEnvironment\Response;
+use Laminas\Psr7Bridge\Psr7ServerRequest;
 
-// Assume $controller is a Zend\Mvc\Controller\AbstractController instance.
+// Assume $controller is a Laminas\Mvc\Controller\AbstractController instance.
 $result = $controller->dispatch(
-    Psr7ServerRequest::toZend($request),
+    Psr7ServerRequest::toLaminas($request),
     new Response()
 );
 ```
 
-### Shallow conversion to zend-http request
+### Shallow conversion to laminas-http request
 
 ```php
-use Zend\Psr7Bridge\Psr7ServerRequest;
+use Laminas\Psr7Bridge\Psr7ServerRequest;
 
-// Assume $router is a Zend\Router\Http\TreeRouteStack instance.
-$match = $router->match(Psr7ServerRequest::toZend($request, true));
+// Assume $router is a Laminas\Router\Http\TreeRouteStack instance.
+$match = $router->match(Psr7ServerRequest::toLaminas($request, true));
 ```
