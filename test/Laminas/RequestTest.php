@@ -1,15 +1,16 @@
 <?php
+
 /**
- * @see       http://github.com/zendframework/zend-psr7bridge for the canonical source repository
- * @copyright Copyright (c) 2015-2017 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   https://github.com/zendframework/zend-psr7bridge/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/laminas/laminas-psr7bridge for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-psr7bridge/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-psr7bridge/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\Psr7Bridge\Zend;
+namespace LaminasTest\Psr7Bridge\Laminas;
 
+use Laminas\Psr7Bridge\Laminas\Request;
+use Laminas\Uri\Http as Uri;
 use PHPUnit\Framework\TestCase as TestCase;
-use Zend\Psr7Bridge\Zend\Request;
-use Zend\Uri\Http as Uri;
 
 class RequestTest extends TestCase
 {
