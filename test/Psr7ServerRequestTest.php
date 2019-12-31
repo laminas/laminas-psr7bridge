@@ -1,27 +1,28 @@
 <?php
+
 /**
- * @see       http://github.com/zendframework/zend-psr7bridge for the canonical source repository
- * @copyright Copyright (c) 2015-2017 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   https://github.com/zendframework/zend-psr7bridge/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/laminas/laminas-psr7bridge for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-psr7bridge/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-psr7bridge/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\Psr7Bridge;
+namespace LaminasTest\Psr7Bridge;
 
+use Laminas\Diactoros\ServerRequest;
+use Laminas\Diactoros\ServerRequestFactory;
+use Laminas\Diactoros\UploadedFile;
+use Laminas\Http\Header\Cookie;
+use Laminas\Http\PhpEnvironment\Request;
+use Laminas\Http\Request as LaminasRequest;
+use Laminas\Psr7Bridge\Laminas\Request as BridgeRequest;
+use Laminas\Psr7Bridge\Psr7ServerRequest;
+use Laminas\Stdlib\Parameters;
 use PHPUnit\Framework\TestCase as TestCase;
 use Psr\Http\Message\UploadedFileInterface;
-use Zend\Diactoros\ServerRequest;
-use Zend\Diactoros\ServerRequestFactory;
-use Zend\Diactoros\UploadedFile;
-use Zend\Http\Header\Cookie;
-use Zend\Http\PhpEnvironment\Request;
-use Zend\Http\Request as ZendRequest;
-use Zend\Psr7Bridge\Psr7ServerRequest;
-use Zend\Psr7Bridge\Zend\Request as BridgeRequest;
-use Zend\Stdlib\Parameters;
 
 class Psr7ServerRequestTest extends TestCase
 {
-    public function testToZendWithShallowOmitsBody()
+    public function testToLaminasWithShallowOmitsBody()
     {
         $server = [
             'SCRIPT_NAME'     => __FILE__,
@@ -69,48 +70,48 @@ class Psr7ServerRequestTest extends TestCase
             ->withCookieParams($cookies)
             ->withParsedBody($bodyParams);
 
-        $zendRequest = Psr7ServerRequest::toZend($psr7Request, $shallow = true);
+        $laminasRequest = Psr7ServerRequest::toLaminas($psr7Request, $shallow = true);
 
-        // This needs to be a ZF2 request
-        $this->assertInstanceOf(Request::class, $zendRequest);
-        $this->assertInstanceOf(ZendRequest::class, $zendRequest);
+        // This needs to be a Laminas request
+        $this->assertInstanceOf(Request::class, $laminasRequest);
+        $this->assertInstanceOf(LaminasRequest::class, $laminasRequest);
 
         // But, more specifically, an instance where we do not use superglobals
         // to inject it
-        $this->assertInstanceOf(BridgeRequest::class, $zendRequest);
+        $this->assertInstanceOf(BridgeRequest::class, $laminasRequest);
 
         // Assert shallow conditions
         // (content, files, and body parameters are not injected)
-        $this->assertEmpty($zendRequest->getContent());
-        $this->assertCount(0, $zendRequest->getFiles());
-        $this->assertCount(0, $zendRequest->getPost());
+        $this->assertEmpty($laminasRequest->getContent());
+        $this->assertCount(0, $laminasRequest->getFiles());
+        $this->assertCount(0, $laminasRequest->getPost());
 
         // Assert all other Request metadata
-        $this->assertEquals($requestUri, $zendRequest->getRequestUri());
-        $this->assertEquals($uri, $zendRequest->getUri()->toString());
-        $this->assertEquals($method, $zendRequest->getMethod());
+        $this->assertEquals($requestUri, $laminasRequest->getRequestUri());
+        $this->assertEquals($uri, $laminasRequest->getUri()->toString());
+        $this->assertEquals($method, $laminasRequest->getMethod());
 
-        $zf2Headers = $zendRequest->getHeaders();
-        $this->assertTrue($zf2Headers->has('Host'));
-        $this->assertTrue($zf2Headers->has('X-Foo'));
-        $this->assertTrue($zf2Headers->has('Content-Type'));
-        $this->assertEquals('example.com', $zf2Headers->get('Host')->getFieldValue());
-        $this->assertEquals('bar', $zf2Headers->get('X-Foo')->getFieldValue());
-        $this->assertEquals('multipart/form-data', $zf2Headers->get('Content-Type')->getFieldValue());
+        $laminasHeaders = $laminasRequest->getHeaders();
+        $this->assertTrue($laminasHeaders->has('Host'));
+        $this->assertTrue($laminasHeaders->has('X-Foo'));
+        $this->assertTrue($laminasHeaders->has('Content-Type'));
+        $this->assertEquals('example.com', $laminasHeaders->get('Host')->getFieldValue());
+        $this->assertEquals('bar', $laminasHeaders->get('X-Foo')->getFieldValue());
+        $this->assertEquals('multipart/form-data', $laminasHeaders->get('Content-Type')->getFieldValue());
 
-        $this->assertTrue($zf2Headers->has('Cookie'));
-        $cookie = $zf2Headers->get('Cookie');
+        $this->assertTrue($laminasHeaders->has('Cookie'));
+        $cookie = $laminasHeaders->get('Cookie');
         $this->assertInstanceOf(Cookie::class, $cookie);
         $this->assertTrue(isset($cookie['PHPSESSID']));
         $this->assertEquals($cookies['PHPSESSID'], $cookie['PHPSESSID']);
 
-        $test = $zendRequest->getServer();
+        $test = $laminasRequest->getServer();
         $this->assertCount(2, $test);
         $this->assertEquals(__FILE__, $test->get('SCRIPT_NAME'));
         $this->assertEquals(__FILE__, $test->get('SCRIPT_FILENAME'));
     }
 
-    public function testCanCastFullRequestToZend()
+    public function testCanCastFullRequestToLaminas()
     {
         $server = [
             'SCRIPT_NAME'     => __FILE__,
@@ -159,37 +160,37 @@ class Psr7ServerRequestTest extends TestCase
             ->withCookieParams($cookies)
             ->withParsedBody($bodyParams);
 
-        $zendRequest = Psr7ServerRequest::toZend($psr7Request);
+        $laminasRequest = Psr7ServerRequest::toLaminas($psr7Request);
 
-        // This needs to be a ZF2 request
-        $this->assertInstanceOf(Request::class, $zendRequest);
-        $this->assertInstanceOf(ZendRequest::class, $zendRequest);
+        // This needs to be a Laminas request
+        $this->assertInstanceOf(Request::class, $laminasRequest);
+        $this->assertInstanceOf(LaminasRequest::class, $laminasRequest);
 
         // But, more specifically, an instance where we do not use superglobals
         // to inject it
-        $this->assertInstanceOf(BridgeRequest::class, $zendRequest);
+        $this->assertInstanceOf(BridgeRequest::class, $laminasRequest);
 
-        $this->assertEquals($requestUri, $zendRequest->getRequestUri());
-        $this->assertEquals($uri, $zendRequest->getUri()->toString());
-        $this->assertEquals($method, $zendRequest->getMethod());
+        $this->assertEquals($requestUri, $laminasRequest->getRequestUri());
+        $this->assertEquals($uri, $laminasRequest->getUri()->toString());
+        $this->assertEquals($method, $laminasRequest->getMethod());
 
-        $zf2Headers = $zendRequest->getHeaders();
-        $this->assertTrue($zf2Headers->has('Host'));
-        $this->assertTrue($zf2Headers->has('X-Foo'));
-        $this->assertTrue($zf2Headers->has('Content-Type'));
-        $this->assertEquals('example.com', $zf2Headers->get('Host')->getFieldValue());
-        $this->assertEquals('bar', $zf2Headers->get('X-Foo')->getFieldValue());
-        $this->assertEquals('multipart/form-data', $zf2Headers->get('Content-Type')->getFieldValue());
+        $laminasHeaders = $laminasRequest->getHeaders();
+        $this->assertTrue($laminasHeaders->has('Host'));
+        $this->assertTrue($laminasHeaders->has('X-Foo'));
+        $this->assertTrue($laminasHeaders->has('Content-Type'));
+        $this->assertEquals('example.com', $laminasHeaders->get('Host')->getFieldValue());
+        $this->assertEquals('bar', $laminasHeaders->get('X-Foo')->getFieldValue());
+        $this->assertEquals('multipart/form-data', $laminasHeaders->get('Content-Type')->getFieldValue());
 
-        $this->assertTrue($zf2Headers->has('Cookie'));
-        $cookie = $zf2Headers->get('Cookie');
+        $this->assertTrue($laminasHeaders->has('Cookie'));
+        $cookie = $laminasHeaders->get('Cookie');
         $this->assertInstanceOf(Cookie::class, $cookie);
         $this->assertTrue(isset($cookie['PHPSESSID']));
         $this->assertEquals($cookies['PHPSESSID'], $cookie['PHPSESSID']);
 
-        $this->assertEquals(file_get_contents(__FILE__), (string) $zendRequest->getContent());
+        $this->assertEquals(file_get_contents(__FILE__), (string) $laminasRequest->getContent());
 
-        $test = $zendRequest->getFiles();
+        $test = $laminasRequest->getFiles();
         $this->assertCount(1, $test);
         $this->assertTrue(isset($test['foo']));
         $upload = $test->get('foo');
@@ -199,16 +200,16 @@ class Psr7ServerRequestTest extends TestCase
         $this->assertArrayHasKey('tmp_name', $upload);
         $this->assertArrayHasKey('error', $upload);
 
-        $this->assertEquals($bodyParams, $zendRequest->getPost()->getArrayCopy());
+        $this->assertEquals($bodyParams, $laminasRequest->getPost()->getArrayCopy());
 
-        $test = $zendRequest->getServer();
+        $test = $laminasRequest->getServer();
         $this->assertCount(2, $test);
         $this->assertEquals(__FILE__, $test->get('SCRIPT_NAME'));
         $this->assertEquals(__FILE__, $test->get('SCRIPT_FILENAME'));
     }
 
 
-    public function testCanCastErroneousUploadToZendRequest()
+    public function testCanCastErroneousUploadToLaminasRequest()
     {
         $server = [
             'SCRIPT_NAME'     => __FILE__,
@@ -257,37 +258,37 @@ class Psr7ServerRequestTest extends TestCase
             ->withCookieParams($cookies)
             ->withParsedBody($bodyParams);
 
-        $zendRequest = Psr7ServerRequest::toZend($psr7Request);
+        $laminasRequest = Psr7ServerRequest::toLaminas($psr7Request);
 
-        // This needs to be a ZF2 request
-        $this->assertInstanceOf(Request::class, $zendRequest);
-        $this->assertInstanceOf(ZendRequest::class, $zendRequest);
+        // This needs to be a Laminas request
+        $this->assertInstanceOf(Request::class, $laminasRequest);
+        $this->assertInstanceOf(LaminasRequest::class, $laminasRequest);
 
         // But, more specifically, an instance where we do not use superglobals
         // to inject it
-        $this->assertInstanceOf(BridgeRequest::class, $zendRequest);
+        $this->assertInstanceOf(BridgeRequest::class, $laminasRequest);
 
-        $this->assertEquals($requestUri, $zendRequest->getRequestUri());
-        $this->assertEquals($uri, $zendRequest->getUri()->toString());
-        $this->assertEquals($method, $zendRequest->getMethod());
+        $this->assertEquals($requestUri, $laminasRequest->getRequestUri());
+        $this->assertEquals($uri, $laminasRequest->getUri()->toString());
+        $this->assertEquals($method, $laminasRequest->getMethod());
 
-        $zf2Headers = $zendRequest->getHeaders();
-        $this->assertTrue($zf2Headers->has('Host'));
-        $this->assertTrue($zf2Headers->has('X-Foo'));
-        $this->assertTrue($zf2Headers->has('Content-Type'));
-        $this->assertEquals('example.com', $zf2Headers->get('Host')->getFieldValue());
-        $this->assertEquals('bar', $zf2Headers->get('X-Foo')->getFieldValue());
-        $this->assertEquals('multipart/form-data', $zf2Headers->get('Content-Type')->getFieldValue());
+        $laminasHeaders = $laminasRequest->getHeaders();
+        $this->assertTrue($laminasHeaders->has('Host'));
+        $this->assertTrue($laminasHeaders->has('X-Foo'));
+        $this->assertTrue($laminasHeaders->has('Content-Type'));
+        $this->assertEquals('example.com', $laminasHeaders->get('Host')->getFieldValue());
+        $this->assertEquals('bar', $laminasHeaders->get('X-Foo')->getFieldValue());
+        $this->assertEquals('multipart/form-data', $laminasHeaders->get('Content-Type')->getFieldValue());
 
-        $this->assertTrue($zf2Headers->has('Cookie'));
-        $cookie = $zf2Headers->get('Cookie');
+        $this->assertTrue($laminasHeaders->has('Cookie'));
+        $cookie = $laminasHeaders->get('Cookie');
         $this->assertInstanceOf(Cookie::class, $cookie);
         $this->assertTrue(isset($cookie['PHPSESSID']));
         $this->assertEquals($cookies['PHPSESSID'], $cookie['PHPSESSID']);
 
-        $this->assertEquals(file_get_contents(__FILE__), (string) $zendRequest->getContent());
+        $this->assertEquals(file_get_contents(__FILE__), (string) $laminasRequest->getContent());
 
-        $test = $zendRequest->getFiles();
+        $test = $laminasRequest->getFiles();
         $this->assertCount(1, $test);
         $this->assertTrue(isset($test['foo']));
         $upload = $test->get('foo');
@@ -302,20 +303,20 @@ class Psr7ServerRequestTest extends TestCase
         $this->assertArrayHasKey('error', $upload);
         $this->assertEquals($upload['error'], UPLOAD_ERR_NO_FILE);
 
-        $this->assertEquals($bodyParams, $zendRequest->getPost()->getArrayCopy());
+        $this->assertEquals($bodyParams, $laminasRequest->getPost()->getArrayCopy());
 
-        $test = $zendRequest->getServer();
+        $test = $laminasRequest->getServer();
         $this->assertCount(2, $test);
         $this->assertEquals(__FILE__, $test->get('SCRIPT_NAME'));
         $this->assertEquals(__FILE__, $test->get('SCRIPT_FILENAME'));
     }
 
-    public function testNestedFileParametersArePassedCorrectlyToZendRequest()
+    public function testNestedFileParametersArePassedCorrectlyToLaminasRequest()
     {
         $this->markTestIncomplete('Functionality is written but untested');
     }
 
-    public function testCustomHttpMethodsDoNotRaiseAnExceptionDuringConversionToZendRequest()
+    public function testCustomHttpMethodsDoNotRaiseAnExceptionDuringConversionToLaminasRequest()
     {
         $this->markTestIncomplete('Functionality is written but untested');
     }
@@ -324,7 +325,7 @@ class Psr7ServerRequestTest extends TestCase
     {
         return [
             [
-                'http://framework.zend.com/', // uri
+                'https://getlaminas.org/', // uri
                 'GET', // http method
                 [ 'Content-Type' => 'text/html' ], // headers
                 '<html></html>', // body
@@ -333,7 +334,7 @@ class Psr7ServerRequestTest extends TestCase
                 [], // files
             ],
             [
-                'http://framework.zend.com/', // uri
+                'https://getlaminas.org/', // uri
                 'POST', // http method
                 [
                     'Content-Type' => 'application/x-www-form-urlencoded',
@@ -345,7 +346,7 @@ class Psr7ServerRequestTest extends TestCase
                 [], // files
             ],
             [
-                'http://framework.zend.com/', // uri
+                'https://getlaminas.org/', // uri
                 'POST', // http method
                 [ 'Content-Type' => 'multipart/form-data' ], // headers
                 file_get_contents(__FILE__), // body
@@ -371,7 +372,7 @@ class Psr7ServerRequestTest extends TestCase
                 ], // files
             ],
             [
-                'http://framework.zend.com/', // uri
+                'https://getlaminas.org/', // uri
                 'POST', // http method
                 [ 'Content-Type' => 'multipart/form-data' ], // headers
                 file_get_contents(__FILE__), // body
@@ -393,18 +394,18 @@ class Psr7ServerRequestTest extends TestCase
     /**
      * @dataProvider getResponseData
      */
-    public function testFromZend($uri, $method, $headers, $body, $query, $post, $files)
+    public function testFromLaminas($uri, $method, $headers, $body, $query, $post, $files)
     {
-        $zendRequest = new ZendRequest();
-        $zendRequest->setUri($uri);
-        $zendRequest->setMethod($method);
-        $zendRequest->getHeaders()->addHeaders($headers);
-        $zendRequest->setContent($body);
-        $zendRequest->getQuery()->fromArray($query);
-        $zendRequest->getPost()->fromArray($post);
-        $zendRequest->getFiles()->fromArray($files);
+        $laminasRequest = new LaminasRequest();
+        $laminasRequest->setUri($uri);
+        $laminasRequest->setMethod($method);
+        $laminasRequest->getHeaders()->addHeaders($headers);
+        $laminasRequest->setContent($body);
+        $laminasRequest->getQuery()->fromArray($query);
+        $laminasRequest->getPost()->fromArray($post);
+        $laminasRequest->getFiles()->fromArray($files);
 
-        $psr7Request = Psr7ServerRequest::fromZend($zendRequest);
+        $psr7Request = Psr7ServerRequest::fromLaminas($laminasRequest);
         $this->assertInstanceOf(ServerRequest::class, $psr7Request);
         // URI
         $this->assertEquals($uri, (string) $psr7Request->getUri());
@@ -425,48 +426,48 @@ class Psr7ServerRequestTest extends TestCase
         $this->compareUploadedFiles($files, $psr7Request->getUploadedFiles());
     }
 
-    private function compareUploadedFiles($zend, $psr7)
+    private function compareUploadedFiles($laminas, $psr7)
     {
         if (! $psr7 instanceof UploadedFileInterface) {
-            $this->assertEquals(count($zend), count($psr7), 'number of files should be same');
+            $this->assertEquals(count($laminas), count($psr7), 'number of files should be same');
         }
 
-        foreach ($zend as $name => $value) {
+        foreach ($laminas as $name => $value) {
             if (is_array($value)) {
-                $this->compareUploadedFiles($zend[$name], $psr7[$name]);
+                $this->compareUploadedFiles($laminas[$name], $psr7[$name]);
                 continue;
             }
 
-            $this->assertEquals($zend['name'], $psr7->getClientFilename());
-            $this->assertEquals($zend['type'], $psr7->getClientMediaType());
-            $this->assertEquals($zend['size'], $psr7->getSize());
-            $this->assertEquals($zend['tmp_name'], $psr7->getStream()->getMetadata('uri'));
-            $this->assertEquals($zend['error'], $psr7->getError());
+            $this->assertEquals($laminas['name'], $psr7->getClientFilename());
+            $this->assertEquals($laminas['type'], $psr7->getClientMediaType());
+            $this->assertEquals($laminas['size'], $psr7->getSize());
+            $this->assertEquals($laminas['tmp_name'], $psr7->getStream()->getMetadata('uri'));
+            $this->assertEquals($laminas['error'], $psr7->getError());
             break;
         }
     }
 
-    public function testFromZendConvertsCookies()
+    public function testFromLaminasConvertsCookies()
     {
-        $request = new ZendRequest();
-        $zendCookieData = ['foo' => 'test', 'bar' => 'test 2'];
-        $request->getHeaders()->addHeader(new Cookie($zendCookieData));
+        $request = new LaminasRequest();
+        $laminasCookieData = ['foo' => 'test', 'bar' => 'test 2'];
+        $request->getHeaders()->addHeader(new Cookie($laminasCookieData));
 
-        $psr7Request = Psr7ServerRequest::fromZend($request);
+        $psr7Request = Psr7ServerRequest::fromLaminas($request);
 
         $psr7CookieData = $psr7Request->getCookieParams();
 
-        $this->assertEquals(count($zendCookieData), count($psr7CookieData));
-        $this->assertEquals($zendCookieData['foo'], $psr7CookieData['foo']);
-        $this->assertEquals($zendCookieData['bar'], $psr7CookieData['bar']);
+        $this->assertEquals(count($laminasCookieData), count($psr7CookieData));
+        $this->assertEquals($laminasCookieData['foo'], $psr7CookieData['foo']);
+        $this->assertEquals($laminasCookieData['bar'], $psr7CookieData['bar']);
     }
 
     public function testServerParams()
     {
-        $zendRequest = new Request();
-        $zendRequest->setServer(new Parameters(['REMOTE_ADDR' => '127.0.0.1']));
+        $laminasRequest = new Request();
+        $laminasRequest->setServer(new Parameters(['REMOTE_ADDR' => '127.0.0.1']));
 
-        $psr7Request = Psr7ServerRequest::fromZend($zendRequest);
+        $psr7Request = Psr7ServerRequest::fromLaminas($laminasRequest);
 
         $params = $psr7Request->getServerParams();
         $this->assertArrayHasKey('REMOTE_ADDR', $params);
@@ -489,9 +490,9 @@ class Psr7ServerRequestTest extends TestCase
         ];
 
         $psr7 = ServerRequestFactory::fromGlobals();
-        $converted = Psr7ServerRequest::toZend($psr7);
-        $zendRequest = new Request();
+        $converted = Psr7ServerRequest::toLaminas($psr7);
+        $laminasRequest = new Request();
 
-        $this->assertSame($zendRequest->getBaseUrl(), $converted->getBaseUrl());
+        $this->assertSame($laminasRequest->getBaseUrl(), $converted->getBaseUrl());
     }
 }

@@ -1,33 +1,32 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @see       http://github.com/zendframework/zend-diactoros for the canonical source repository
- * @copyright Copyright (c) 2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   https://github.com/zendframework/zend-diactoros/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/laminas/laminas-psr7bridge for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-psr7bridge/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-psr7bridge/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\Psr7Bridge;
+namespace Laminas\Psr7Bridge;
 
+use Laminas\Diactoros\Response;
+use Laminas\Diactoros\Stream;
+use Laminas\Http\Header\GenericHeader;
+use Laminas\Http\Headers;
+use Laminas\Http\Response as LaminasResponse;
 use Psr\Http\Message\ResponseInterface;
-use Zend\Diactoros\Response;
-use Zend\Diactoros\Stream;
-use Zend\Http\Header\GenericHeader;
-use Zend\Http\Headers;
-use Zend\Http\Response as ZendResponse;
 
 final class Psr7Response
 {
     const URI_TEMP = 'php://temp';
 
     /**
-     * Convert a PSR-7 response in a Zend\Http\Response
+     * Convert a PSR-7 response in a Laminas\Http\Response
      *
      * @param  ResponseInterface $psr7Response
      *
-     * @return ZendResponse
+     * @return LaminasResponse
      */
-    public static function toZend(ResponseInterface $psr7Response)
+    public static function toLaminas(ResponseInterface $psr7Response)
     {
         $uri = $psr7Response->getBody()->getMetadata('uri');
 
@@ -41,22 +40,22 @@ final class Psr7Response
                 (string)$psr7Response->getBody()
             );
 
-            return ZendResponse::fromString($response);
+            return LaminasResponse::fromString($response);
         }
 
         // it's a real file stream:
-        $response = new ZendResponse\Stream();
+        $response = new LaminasResponse\Stream();
 
         // copy the headers
-        $zendHeaders = new Headers();
+        $laminasHeaders = new Headers();
         foreach ($psr7Response->getHeaders() as $headerName => $headerValues) {
-            $zendHeaders->addHeader(new GenericHeader($headerName, implode('; ', $headerValues)));
+            $laminasHeaders->addHeader(new GenericHeader($headerName, implode('; ', $headerValues)));
         }
 
         // set the status
         $response->setStatusCode($psr7Response->getStatusCode());
         // set the headers
-        $response->setHeaders($zendHeaders);
+        $response->setHeaders($laminasHeaders);
         // set the stream
         $response->setStream(fopen($uri, 'rb'));
 
@@ -64,21 +63,21 @@ final class Psr7Response
     }
 
     /**
-     * Convert a Zend\Http\Response in a PSR-7 response, using zend-diactoros
+     * Convert a Laminas\Http\Response in a PSR-7 response, using laminas-diactoros
      *
-     * @param  ZendResponse $zendResponse
+     * @param  LaminasResponse $laminasResponse
      *
      * @return Response
      */
-    public static function fromZend(ZendResponse $zendResponse)
+    public static function fromLaminas(LaminasResponse $laminasResponse)
     {
         $body = new Stream('php://temp', 'wb+');
-        $body->write($zendResponse->getBody());
+        $body->write($laminasResponse->getBody());
 
         return new Response(
             $body,
-            $zendResponse->getStatusCode(),
-            $zendResponse->getHeaders()->toArray()
+            $laminasResponse->getStatusCode(),
+            $laminasResponse->getHeaders()->toArray()
         );
     }
 
@@ -104,5 +103,21 @@ final class Psr7Response
      */
     private function __construct()
     {
+    }
+
+    /**
+     * @deprecated Use self::toLaminas instead
+     */
+    public static function toZend(ResponseInterface $psr7Response)
+    {
+        return self::toLaminas(...func_get_args());
+    }
+
+    /**
+     * @deprecated Use self::fromLaminas instead
+     */
+    public static function fromZend(LaminasResponse $laminasResponse)
+    {
+        return self::fromLaminas(...func_get_args());
     }
 }
