@@ -1,45 +1,21 @@
 {
-    "name": "zendframework/zend-psr7bridge",
-    "description": "PSR-7 &lt;-&gt; zend-http message conversions",
+    "name": "laminas/laminas-psr7bridge",
+    "description": "PSR-7 &lt;-&gt; laminas-http message conversions",
     "license": "BSD-3-Clause",
     "keywords": [
-        "zf",
+        "laminas",
         "http",
         "psr",
-        "psr-7",
-        "zend",
-        "zendframework"
+        "psr-7"
     ],
+    "homepage": "https://laminas.dev",
     "support": {
-        "docs": "https://docs.zendframework.com/zend-psr7bridge/",
-        "issues": "https://github.com/zendframework/zend-psr7bridge/issues",
-        "source": "https://github.com/zendframework/zend-psr7bridge",
-        "rss": "https://github.com/zendframework/zend-psr7bridge/releases.atom",
-        "slack": "https://zendframework-slack.herokuapp.com",
-        "forum": "https://discourse.zendframework.com/c/questions/components"
-    },
-    "require": {
-        "php": "^5.6 || ^7.0",
-        "psr/http-message": "^1.0",
-        "zendframework/zend-diactoros": "^1.7 || ^2.0",
-        "zendframework/zend-http": "^2.7"
-    },
-    "require-dev": {
-        "phpunit/phpunit": "^5.7.15 || ^6.5.6",
-        "zendframework/zend-coding-standard": "~1.0.0"
-    },
-    "conflict": {
-        "zendframework/zend-stdlib": "< 3.2.1"
-    },
-    "autoload": {
-        "psr-4": {
-            "Zend\\Psr7Bridge\\": "src/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "ZendTest\\Psr7Bridge\\": "test/"
-        }
+        "docs": "https://docs.laminas.dev/laminas-psr7bridge/",
+        "issues": "https://github.com/laminas/laminas-psr7bridge/issues",
+        "source": "https://github.com/laminas/laminas-psr7bridge",
+        "rss": "https://github.com/laminas/laminas-psr7bridge/releases.atom",
+        "chat": "https://laminas.dev/chat",
+        "forum": "https://discourse.laminas.dev"
     },
     "config": {
         "sort-packages": true
@@ -48,6 +24,30 @@
         "branch-alias": {
             "dev-master": "1.2.x-dev",
             "dev-develop": "1.3.x-dev"
+        }
+    },
+    "require": {
+        "php": "^5.6 || ^7.0",
+        "laminas/laminas-diactoros": "^1.7 || ^2.0",
+        "laminas/laminas-http": "^2.7",
+        "laminas/laminas-zendframework-bridge": "^1.0",
+        "psr/http-message": "^1.0"
+    },
+    "require-dev": {
+        "laminas/laminas-coding-standard": "~1.0.0",
+        "phpunit/phpunit": "^5.7.15 || ^6.5.6"
+    },
+    "conflict": {
+        "laminas/laminas-stdlib": "< 3.2.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Laminas\\Psr7Bridge\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "LaminasTest\\Psr7Bridge\\": "test/"
         }
     },
     "scripts": {
@@ -59,5 +59,8 @@
         "cs-fix": "phpcbf",
         "test": "phpunit --colors=always",
         "test-coverage": "phpunit --colors=always --coverage-clover clover.xml"
+    },
+    "replace": {
+        "zendframework/zend-psr7bridge": "self.version"
     }
 }
