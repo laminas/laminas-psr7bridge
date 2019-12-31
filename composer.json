@@ -1,17 +1,24 @@
 {
-    "name": "zendframework/zend-psr7bridge",
-    "description": "PSR-7 <-> Zend\\Http bridge",
-    "type": "library",
+    "name": "laminas/laminas-psr7bridge",
+    "description": "PSR-7 <-> Laminas\\Http bridge",
     "license": "BSD-3-Clause",
     "keywords": [
+        "laminas",
         "http",
         "psr",
         "psr-7"
     ],
-    "homepage": "https://github.com/zendframework/zend-psr7bridge",
+    "homepage": "https://laminas.dev",
     "support": {
-        "issues": "https://github.com/zendframework/zend-psr7bridge/issues",
-        "source": "https://github.com/zendframework/zend-psr7bridge"
+        "docs": "https://docs.laminas.dev/laminas-psr7bridge/",
+        "issues": "https://github.com/laminas/laminas-psr7bridge/issues",
+        "source": "https://github.com/laminas/laminas-psr7bridge",
+        "rss": "https://github.com/laminas/laminas-psr7bridge/releases.atom",
+        "chat": "https://laminas.dev/chat",
+        "forum": "https://discourse.laminas.dev"
+    },
+    "config": {
+        "sort-packages": true
     },
     "extra": {
         "branch-alias": {
@@ -21,9 +28,10 @@
     },
     "require": {
         "php": ">=5.5",
-        "zendframework/zend-http": "^2.5",
-        "psr/http-message": "^1.0",
-        "zendframework/zend-diactoros": "^1.1"
+        "laminas/laminas-diactoros": "^1.1",
+        "laminas/laminas-http": "^2.5",
+        "laminas/laminas-zendframework-bridge": "^1.0",
+        "psr/http-message": "^1.0"
     },
     "require-dev": {
         "phpunit/phpunit": "^4.7",
@@ -31,12 +39,15 @@
     },
     "autoload": {
         "psr-4": {
-            "Zend\\Psr7Bridge\\": "src/"
+            "Laminas\\Psr7Bridge\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "ZendTest\\Psr7Bridge\\": "test/"
+            "LaminasTest\\Psr7Bridge\\": "test/"
         }
+    },
+    "replace": {
+        "zendframework/zend-psr7bridge": "self.version"
     }
 }

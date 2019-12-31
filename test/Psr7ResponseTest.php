@@ -1,19 +1,18 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @see       http://github.com/zendframework/zend-diactoros for the canonical source repository
- * @copyright Copyright (c) 2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   https://github.com/zendframework/zend-diactoros/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/laminas/laminas-psr7bridge for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-psr7bridge/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-psr7bridge/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\Psr7Bridge;
+namespace LaminasTest\Psr7Bridge;
 
+use Laminas\Diactoros\Response;
+use Laminas\Diactoros\Stream;
+use Laminas\Http\Response as LaminasResponse;
+use Laminas\Psr7Bridge\Psr7Response;
 use PHPUnit_Framework_TestCase as TestCase;
-use Zend\Diactoros\Response;
-use Zend\Diactoros\Stream;
-use Zend\Psr7Bridge\Psr7Response;
-use Zend\Http\Response as ZendResponse;
 
 class Psr7ResponseTest extends TestCase
 {
@@ -36,7 +35,7 @@ class Psr7ResponseTest extends TestCase
     /**
      * @dataProvider getResponseData
      */
-    public function testResponseToZend($body, $status, $headers)
+    public function testResponseToLaminas($body, $status, $headers)
     {
         $stream = new Stream('php://temp', 'wb+');
         $stream->write($body);
@@ -44,15 +43,15 @@ class Psr7ResponseTest extends TestCase
         $psr7Response = new Response($stream, $status, $headers);
         $this->assertInstanceOf('Psr\Http\Message\ResponseInterface', $psr7Response);
 
-        $zendResponse = Psr7Response::toZend($psr7Response);
-        $this->assertInstanceOf('Zend\Http\Response', $zendResponse);
-        $this->assertEquals($body, (string) $zendResponse->getBody());
-        $this->assertEquals($status, $zendResponse->getStatusCode());
+        $laminasResponse = Psr7Response::toLaminas($psr7Response);
+        $this->assertInstanceOf('Laminas\Http\Response', $laminasResponse);
+        $this->assertEquals($body, (string) $laminasResponse->getBody());
+        $this->assertEquals($status, $laminasResponse->getStatusCode());
 
-        $zendHeaders = $zendResponse->getHeaders()->toArray();
+        $laminasHeaders = $laminasResponse->getHeaders()->toArray();
         foreach ($headers as $type => $values) {
             foreach ($values as $value) {
-                $this->assertContains($value, $zendHeaders[$type]);
+                $this->assertContains($value, $laminasHeaders[$type]);
             }
         }
     }
@@ -70,19 +69,19 @@ class Psr7ResponseTest extends TestCase
     /**
      * @dataProvider getResponseString
      */
-    public function testResponseFromZend($response)
+    public function testResponseFromLaminas($response)
     {
-        $zendResponse = ZendResponse::fromString($response);
-        $this->assertInstanceOf('Zend\Http\Response', $zendResponse);
-        $psr7Response = Psr7Response::fromZend($zendResponse);
+        $laminasResponse = LaminasResponse::fromString($response);
+        $this->assertInstanceOf('Laminas\Http\Response', $laminasResponse);
+        $psr7Response = Psr7Response::fromLaminas($laminasResponse);
         $this->assertInstanceOf('Psr\Http\Message\ResponseInterface', $psr7Response);
-        $this->assertEquals((string) $psr7Response->getBody(), $zendResponse->getBody());
-        $this->assertEquals($psr7Response->getStatusCode(), $zendResponse->getStatusCode());
+        $this->assertEquals((string) $psr7Response->getBody(), $laminasResponse->getBody());
+        $this->assertEquals($psr7Response->getStatusCode(), $laminasResponse->getStatusCode());
 
-        $zendHeaders = $zendResponse->getHeaders()->toArray();
+        $laminasHeaders = $laminasResponse->getHeaders()->toArray();
         foreach ($psr7Response->getHeaders() as $type => $values) {
             foreach ($values as $value) {
-                $this->assertContains($value, $zendHeaders[$type]);
+                $this->assertContains($value, $laminasHeaders[$type]);
             }
         }
     }

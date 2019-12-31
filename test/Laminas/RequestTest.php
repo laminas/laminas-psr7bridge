@@ -1,16 +1,15 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @see       http://github.com/zendframework/zend-diactoros for the canonical source repository
- * @copyright Copyright (c) 2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   https://github.com/zendframework/zend-diactoros/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/laminas/laminas-psr7bridge for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-psr7bridge/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-psr7bridge/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\Psr7Bridge\Zend;
+namespace LaminasTest\Psr7Bridge\Laminas;
 
+use Laminas\Psr7Bridge\Laminas\Request;
 use PHPUnit_Framework_TestCase as TestCase;
-use Zend\Psr7Bridge\Zend\Request;
 
 class RequestTest extends TestCase
 {
@@ -23,7 +22,7 @@ class RequestTest extends TestCase
         $this->assertInstanceOf(Request::class, $request);
         $this->assertSame($method, $request->getMethod());
         $this->assertSame($path, $request->getRequestUri());
-        $this->assertInstanceOf('Zend\Uri\Http', $request->getUri());
+        $this->assertInstanceOf('Laminas\Uri\Http', $request->getUri());
         $this->assertSame($path, $request->getUri()->getPath());
         $this->assertEmpty($request->getHeaders());
         $this->assertEmpty($request->getCookie());
