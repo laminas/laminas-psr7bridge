@@ -1,36 +1,35 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @see       http://github.com/zendframework/zend-diactoros for the canonical source repository
- * @copyright Copyright (c) 2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   https://github.com/zendframework/zend-diactoros/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/laminas/laminas-psr7bridge for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-psr7bridge/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-psr7bridge/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\Psr7Bridge;
+namespace Laminas\Psr7Bridge;
 
+use Laminas\Diactoros\ServerRequest;
+use Laminas\Diactoros\Stream;
+use Laminas\Diactoros\UploadedFile;
+use Laminas\Http\PhpEnvironment\Request as LaminasPhpEnvironmentRequest;
+use Laminas\Http\Request as LaminasRequest;
 use Psr\Http\Message\ServerRequestInterface;
-use Zend\Http\PhpEnvironment\Request as ZendPhpEnvironmentRequest;
-use Zend\Http\Request as ZendRequest;
-use Zend\Diactoros\ServerRequest;
-use Zend\Diactoros\Stream;
-use Zend\Diactoros\UploadedFile;
 
 final class Psr7ServerRequest
 {
     /**
-     * Convert a PSR-7 ServerRequest to a Zend\Http server-side request.
+     * Convert a PSR-7 ServerRequest to a Laminas\Http server-side request.
      *
      * @param ServerRequestInterface $psr7Request
      * @param bool $shallow Whether or not to convert without body/file
      *     parameters; defaults to false, meaning a fully populated request
      *     is returned.
-     * @return Zend\Request
+     * @return Laminas\Request
      */
-    public static function toZend(ServerRequestInterface $psr7Request, $shallow = false)
+    public static function toLaminas(ServerRequestInterface $psr7Request, $shallow = false)
     {
         if ($shallow) {
-            return new Zend\Request(
+            return new Laminas\Request(
                 $psr7Request->getMethod(),
                 $psr7Request->getUri(),
                 $psr7Request->getHeaders(),
@@ -42,7 +41,7 @@ final class Psr7ServerRequest
             );
         }
 
-        $zendRequest = new Zend\Request(
+        $laminasRequest = new Laminas\Request(
             $psr7Request->getMethod(),
             $psr7Request->getUri(),
             $psr7Request->getHeaders(),
@@ -52,38 +51,38 @@ final class Psr7ServerRequest
             self::convertUploadedFiles($psr7Request->getUploadedFiles()),
             $psr7Request->getServerParams()
         );
-        $zendRequest->setContent($psr7Request->getBody());
+        $laminasRequest->setContent($psr7Request->getBody());
 
-        return $zendRequest;
+        return $laminasRequest;
     }
 
     /**
-     * Convert a Zend\Http\Response in a PSR-7 response, using zend-diactoros
+     * Convert a Laminas\Http\Response in a PSR-7 response, using laminas-diactoros
      *
-     * @param  ZendRequest $zendRequest
+     * @param  LaminasRequest $laminasRequest
      * @return ServerRequest
      */
-    public static function fromZend(ZendRequest $zendRequest)
+    public static function fromLaminas(LaminasRequest $laminasRequest)
     {
         $body = new Stream('php://memory', 'wb+');
-        $body->write($zendRequest->getContent());
+        $body->write($laminasRequest->getContent());
 
-        $headers = empty($zendRequest->getHeaders()) ? [] : $zendRequest->getHeaders()->toArray();
-        $query   = empty($zendRequest->getQuery()) ? [] : $zendRequest->getQuery()->toArray();
-        $post    = empty($zendRequest->getPost()) ? [] : $zendRequest->getPost()->toArray();
-        $files   = empty($zendRequest->getFiles()) ? [] : $zendRequest->getFiles()->toArray();
+        $headers = empty($laminasRequest->getHeaders()) ? [] : $laminasRequest->getHeaders()->toArray();
+        $query   = empty($laminasRequest->getQuery()) ? [] : $laminasRequest->getQuery()->toArray();
+        $post    = empty($laminasRequest->getPost()) ? [] : $laminasRequest->getPost()->toArray();
+        $files   = empty($laminasRequest->getFiles()) ? [] : $laminasRequest->getFiles()->toArray();
 
         $request = new ServerRequest(
-            $zendRequest instanceof ZendPhpEnvironmentRequest ? iterator_to_array($zendRequest->getServer()) : [],
+            $laminasRequest instanceof LaminasPhpEnvironmentRequest ? iterator_to_array($laminasRequest->getServer()) : [],
             self::convertFilesToUploaded($files),
-            $zendRequest->getUriString(),
-            $zendRequest->getMethod(),
+            $laminasRequest->getUriString(),
+            $laminasRequest->getMethod(),
             $body,
             $headers
         );
         $request = $request->withQueryParams($query);
 
-        $cookie = $zendRequest->getCookie();
+        $cookie = $laminasRequest->getCookie();
         if (false !== $cookie) {
             $request = $request->withCookieParams($cookie->getArrayCopy());
         }
@@ -121,7 +120,7 @@ final class Psr7ServerRequest
     }
 
     /**
-     * Convert a Zend\Http file structure to PSR-7 uploaded files
+     * Convert a Laminas\Http file structure to PSR-7 uploaded files
      *
      * @param array
      * @return UploadedFile[]
@@ -150,5 +149,21 @@ final class Psr7ServerRequest
      */
     private function __construct()
     {
+    }
+
+    /**
+     * @deprecated Use self::toLaminas instead
+     */
+    public static function toZend(ServerRequestInterface $psr7Request, $shallow = false)
+    {
+        return self::toLaminas(...func_get_args());
+    }
+
+    /**
+     * @deprecated Use self::fromLaminas instead
+     */
+    public static function fromZend(LaminasRequest $laminasRequest)
+    {
+        return self::fromLaminas(...func_get_args());
     }
 }
