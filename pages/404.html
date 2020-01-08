@@ -6,10 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="laminas-psr7bridge">  
-    <link rel="canonical" href="https://docs.laminas.dev/usage-examples/">
     <link rel="shortcut icon" href="/img/trademark-laminas-foundation-rgb.svg">
 
-    <title>Usage - laminas-psr7bridge - Laminas Docs</title>
+    <title>laminas-psr7bridge - Laminas Docs</title>
 
     <link rel="stylesheet" href="/css/styles.css">
 </head>
@@ -59,7 +58,7 @@
                     
     <div class="subnavigation hidden-print">
         <h4 class="subnavigation__title">
-            <a href="..">laminas-psr7bridge</a>
+            <a href="../.">laminas-psr7bridge</a>
         </h4>
 
         <h5 class="subnavigation__subtitle">Table of Contents</h5>
@@ -87,8 +86,8 @@
                     
                     
                         
-                            <li class="subnavigation__list-item subnavigation__list-item--active">
-                                <a href="./" class="subnavigation__link">Usage</a>
+                            <li class="subnavigation__list-item ">
+                                <a href="../usage-examples/" class="subnavigation__link">Usage</a>
                             </li>
                         
                     
@@ -153,124 +152,21 @@
         <div class="row">
             <div class="col-md-2 col-sm-12">
                 
-    
-
-    
-    
-        <div class="toc">
-            <h6 class="toc__headline">On this page</h6>
-            <ul class="toc__list">
-                
-                    <li class="toc__entry">
-                        <a href="#converting-a-psr-7-serverrequestinterface-to-a-laminashttpphpenvironmentrequest" class="toc__link">Converting a PSR-7 ServerRequestInterface to a Laminas\Http\PhpEnvironment\Request</a>
-                    </li>
-                
-                    <li class="toc__entry">
-                        <a href="#examples" class="toc__link">Examples</a>
-                    </li>
-                
-            </ul>
-        </div>
-    
-
             </div>
             <div class="col-md-7 col-sm-12 content" role="main" data-spy="scroll" data-target=".toc">
                 
-                    <nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-        
-            <li class="breadcrumb-item"><a href="">Overview</a></li>
 
-            
-                <li class="breadcrumb-item"><a href="..">laminas-psr7bridge</a></li>
+<h1 class="content__title">404</h1>
+<blockquote>
+    <h3>Something went wrong!</h3>
+    <p>
+        We're sorry, but the page you are looking for does not exist.
+    </p>
+</blockquote>
 
-                
-
-                <li class="breadcrumb-item active" aria-current="page">Usage</li>
-            
-        
-    </ol>
-</nav>
+<a href="../." class="btn btn-default" role="button">Go to homepage</a>
 
 
-
-
-
-
-    
-    
-
-    <h1 id="usage">Usage</h1>
-<h2 id="converting-a-psr-7-serverrequestinterface-to-a-laminashttpphpenvironmentrequest">Converting a PSR-7 ServerRequestInterface to a Laminas\Http\PhpEnvironment\Request</h2>
-<p>The PSR-7 <a href="http://www.php-fig.org/psr/psr-7/#321-psrhttpmessageserverrequestinterface">ServerRequestInterface</a>
-corresponds to the laminas-http <a href="https://github.com/laminas/laminas-http/blob/master/src/PhpEnvironment/Request.php">PhpEnvironment\Request</a>.</p>
-<p>To convert from a PSR-7 instance to a laminas-http instance, use
-<code>Laminas\Psr7Bridge\Psr7ServerRequest::toLaminas()</code>. This method takes up to two
-arguments:</p>
-<ul>
-<li>the <code>ServerRequestInterface</code> instance to convert.</li>
-<li>a boolean flag indicating whether or not to do a "shallow" conversion.</li>
-</ul>
-<p><em>Shallow conversions</em> omit:</p>
-<ul>
-<li>body parameters ("post" in laminas-http)</li>
-<li>uploaded files</li>
-<li>the body content</li>
-</ul>
-<p>It is useful to omit these for purposes of routing, for instance, when you may
-not need this more process-intensive data. By default, the <code>$shallow</code> flag is
-<code>false</code>, meaning a full conversion is done.</p>
-<h2 id="examples">Examples</h2>
-<h3>Full conversion to laminas-http request</h3>
-<pre class=codehilite><code class=language-php>use Laminas\Http\PhpEnvironment\Response;
-use Laminas\Psr7Bridge\Psr7ServerRequest;
-
-// Assume $controller is a Laminas\Mvc\Controller\AbstractController instance.
-$result = $controller-&gt;dispatch(
-    Psr7ServerRequest::toLaminas($request),
-    new Response()
-);</code></pre>
-<h3>Shallow conversion to laminas-http request</h3>
-<pre class=codehilite><code class=language-php>use Laminas\Psr7Bridge\Psr7ServerRequest;
-
-// Assume $router is a Laminas\Router\Http\TreeRouteStack instance.
-$match = $router-&gt;match(Psr7ServerRequest::toLaminas($request, true));</code></pre>
-
-
-
-
-    <nav>
-    <ul class="page-nav hidden-print">
-
-        
-        <li class="page-nav__item">
-            
-                <a rel="prev" class="page-nav__link page-nav__link--prev" href="../intro/">
-                    <i class="fa fa-chevron-left"></i> Previous
-                </a>
-            
-        </li>
-
-        
-        <li class="page-nav__item">
-            
-        </li>
-    </ul>
-</nav>
-
-
-
-
-    <div class="help-wanted">
-        <p>
-            Found a mistake or want to contribute to the documentation?
-            <a href="https://github.com/laminas/laminas-psr7bridge/edit/master/docs/book/usage-examples.md" target="_blank" class="help-wanted__link">
-                Edit this page on GitHub!
-            </a>
-        </p>
-    </div>
-
-                
             </div>
             <div class="col-md-3 col-sm-12 sidebar">
                 
@@ -285,7 +181,7 @@ $match = $router-&gt;match(Psr7ServerRequest::toLaminas($request, true));</code>
                     
     <div class="subnavigation hidden-print">
         <h4 class="subnavigation__title">
-            <a href="..">laminas-psr7bridge</a>
+            <a href="../.">laminas-psr7bridge</a>
         </h4>
 
         <h5 class="subnavigation__subtitle">Table of Contents</h5>
@@ -313,8 +209,8 @@ $match = $router-&gt;match(Psr7ServerRequest::toLaminas($request, true));</code>
                     
                     
                         
-                            <li class="subnavigation__list-item subnavigation__list-item--active">
-                                <a href="./" class="subnavigation__link">Usage</a>
+                            <li class="subnavigation__list-item ">
+                                <a href="../usage-examples/" class="subnavigation__link">Usage</a>
                             </li>
                         
                     
