@@ -8,4 +8,4 @@ site_name: laminas-psr7bridge
 site_description: laminas-psr7bridge
 repo_url: 'https://github.com/laminas/laminas-psr7bridge'
 extra:
-    project: Mvc
+    project: MVC
