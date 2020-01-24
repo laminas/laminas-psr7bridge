@@ -568,4 +568,13 @@ class Psr7ServerRequestTest extends TestCase
         $this->expectExceptionMessage(sprintf('Call to private %s::__construct', Psr7ServerRequest::class));
         new Psr7ServerRequest();
     }
+
+    public function testFromLaminasCanHandleNullContent()
+    {
+        $laminasRequest = new LaminasRequest();
+        $laminasRequest->setContent(null);
+
+        $psr7Request = Psr7ServerRequest::fromLaminas($laminasRequest);
+        $this->assertEmpty($psr7Request->getBody()->getContents());
+    }
 }

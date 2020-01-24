@@ -44,7 +44,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- Nothing.
+- [#2](https://github.com/laminas/laminas-psr7bridge/pull/2) Fixes error on attempt to convert laminas-http request with null body content
 
 ## 1.2.0 - 2018-12-20
 
