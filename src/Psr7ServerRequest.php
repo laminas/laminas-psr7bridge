@@ -65,7 +65,9 @@ final class Psr7ServerRequest
     public static function fromLaminas(LaminasRequest $laminasRequest)
     {
         $body = new Stream('php://memory', 'wb+');
-        $body->write($laminasRequest->getContent());
+        if ($laminasRequest->getContent() !== null) {
+            $body->write($laminasRequest->getContent());
+        }
 
         $headers = empty($laminasRequest->getHeaders()) ? [] : $laminasRequest->getHeaders()->toArray();
         $query   = empty($laminasRequest->getQuery()) ? [] : $laminasRequest->getQuery()->toArray();
