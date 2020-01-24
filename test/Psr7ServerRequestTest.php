@@ -401,7 +401,7 @@ class Psr7ServerRequestTest extends TestCase
                 'POST', // http method
                 [
                     'Content-Type' => 'application/x-www-form-urlencoded',
-                    'Cookie' => sprintf("PHPSESSID=%s;foo=bar", uniqid())
+                    'Cookie' => sprintf("PHPSESSID=%s; foo=bar", uniqid())
                 ], // headers
                 '', // body
                 [ 'foo' => 'bar' ], // query params

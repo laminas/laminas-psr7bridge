@@ -73,7 +73,9 @@ final class Psr7ServerRequest
         $files   = empty($laminasRequest->getFiles()) ? [] : $laminasRequest->getFiles()->toArray();
 
         $request = new ServerRequest(
-            $laminasRequest instanceof LaminasPhpEnvironmentRequest ? iterator_to_array($laminasRequest->getServer()) : [],
+            $laminasRequest instanceof LaminasPhpEnvironmentRequest
+                ? iterator_to_array($laminasRequest->getServer())
+                : [],
             self::convertFilesToUploaded($files),
             $laminasRequest->getUriString(),
             $laminasRequest->getMethod(),
