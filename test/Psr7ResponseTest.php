@@ -30,7 +30,7 @@ class Psr7ResponseTest extends TestCase
                 'Content-Length' => [ '5' ]
             ]],
             [ 'Test!', 202, [
-                'Content-Type'   => [ 'text/html; level=1', 'text/html' ],
+                'Content-Type'   => [ 'text/html; level=1' ],
                 'Content-Length' => [ '5' ]
             ]],
         ];
