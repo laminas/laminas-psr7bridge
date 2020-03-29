@@ -61,6 +61,6 @@
         "test-coverage": "phpunit --colors=always --coverage-clover clover.xml"
     },
     "replace": {
-        "zendframework/zend-psr7bridge": "self.version"
+        "zendframework/zend-psr7bridge": "^1.2.0"
     }
 }
