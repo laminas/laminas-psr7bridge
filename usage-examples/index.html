@@ -281,7 +281,7 @@ not need this more process-intensive data. By default, the <code>$shallow</code>
 <code>false</code>, meaning a full conversion is done.</p>
 <h2 id="examples">Examples</h2>
 <h3>Full conversion to laminas-http request</h3>
-<pre class=codehilite><code class=language-php>use Laminas\Http\PhpEnvironment\Response;
+<pre class="highlight"><code class="language-php">use Laminas\Http\PhpEnvironment\Response;
 use Laminas\Psr7Bridge\Psr7ServerRequest;
 
 // Assume $controller is a Laminas\Mvc\Controller\AbstractController instance.
@@ -289,8 +289,9 @@ $result = $controller-&gt;dispatch(
     Psr7ServerRequest::toLaminas($request),
     new Response()
 );</code></pre>
+
 <h3>Shallow conversion to laminas-http request</h3>
-<pre class=codehilite><code class=language-php>use Laminas\Psr7Bridge\Psr7ServerRequest;
+<pre class="highlight"><code class="language-php">use Laminas\Psr7Bridge\Psr7ServerRequest;
 
 // Assume $router is a Laminas\Router\Http\TreeRouteStack instance.
 $match = $router-&gt;match(Psr7ServerRequest::toLaminas($request, true));</code></pre>
