@@ -1,6 +1,6 @@
 {
     "name": "laminas/laminas-psr7bridge",
-    "description": "PSR-7 &lt;-&gt; laminas-http message conversions",
+    "description": "PSR-7 to laminas-http message conversions",
     "license": "BSD-3-Clause",
     "keywords": [
         "laminas",
