@@ -55,7 +55,7 @@ class Psr7ResponseTest extends TestCase
         $laminasHeaders = $laminasResponse->getHeaders()->toArray();
         foreach ($headers as $type => $values) {
             foreach ($values as $value) {
-                $this->assertContains($value, $laminasHeaders[$type]);
+                $this->assertStringContainsString($value, $laminasHeaders[$type]);
             }
         }
     }
@@ -79,7 +79,7 @@ class Psr7ResponseTest extends TestCase
         $laminasHeaders = $laminasResponse->getHeaders()->toArray();
         foreach ($headers as $type => $values) {
             foreach ($values as $value) {
-                $this->assertContains($value, $laminasHeaders[$type]);
+                $this->assertStringContainsString($value, $laminasHeaders[$type]);
             }
         }
     }
@@ -103,7 +103,7 @@ class Psr7ResponseTest extends TestCase
         $laminasHeaders = $laminasResponse->getHeaders()->toArray();
         foreach ($headers as $type => $values) {
             foreach ($values as $value) {
-                $this->assertContains($value, $laminasHeaders[$type]);
+                $this->assertStringContainsString($value, $laminasHeaders[$type]);
             }
         }
     }
@@ -133,7 +133,7 @@ class Psr7ResponseTest extends TestCase
         $laminasHeaders = $laminasResponse->getHeaders()->toArray();
         foreach ($psr7Response->getHeaders() as $type => $values) {
             foreach ($values as $value) {
-                $this->assertContains($value, $laminasHeaders[$type]);
+                $this->assertStringContainsString($value, $laminasHeaders[$type]);
             }
         }
     }
