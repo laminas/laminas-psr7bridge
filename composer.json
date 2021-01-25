@@ -23,7 +23,7 @@
     "extra": {
     },
     "require": {
-        "php": "^5.6 || ^7.0",
+        "php": "^7.3 || ~8.0.0",
         "laminas/laminas-diactoros": "^1.7 || ^2.0",
         "laminas/laminas-http": "^2.11",
         "laminas/laminas-zendframework-bridge": "^1.0",
@@ -31,7 +31,7 @@
     },
     "require-dev": {
         "laminas/laminas-coding-standard": "~1.0.0",
-        "phpunit/phpunit": "^5.7.15 || ^6.5.6 || ^7.5.20"
+        "phpunit/phpunit": "^9.4.1"
     },
     "conflict": {
         "laminas/laminas-stdlib": "< 3.2.1"
