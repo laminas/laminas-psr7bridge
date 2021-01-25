@@ -2,27 +2,28 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## 1.3.0 - TBD
+## 1.3.0 - 2021-01-25
 
-### Added
 
-- Nothing.
+-----
 
-### Changed
+### Release Notes for [1.3.0](https://github.com/laminas/laminas-psr7bridge/milestone/2)
 
-- Nothing.
 
-### Deprecated
 
-- Nothing.
+### 1.3.0
 
-### Removed
+- Total issues resolved: **1**
+- Total pull requests resolved: **1**
+- Total contributors: **2**
 
-- Nothing.
+#### Enhancement,hacktoberfest-accepted
 
-### Fixed
+ - [9: PHP 8.0 support](https://github.com/laminas/laminas-psr7bridge/pull/9) thanks to @Thaix
 
-- Nothing.
+#### Enhancement,Help Wanted,hacktoberfest-accepted
+
+ - [8: PHP 8.0 support](https://github.com/laminas/laminas-psr7bridge/issues/8) thanks to @boesing
 
 ## 1.2.2 - 2020-03-29
 
