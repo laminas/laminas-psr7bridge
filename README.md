@@ -1,7 +1,6 @@
 # laminas-psr7bridge
 
-[![Build Status](https://travis-ci.com/laminas/laminas-psr7bridge.svg?branch=master)](https://travis-ci.com/laminas/laminas-psr7bridge)
-[![Coverage Status](https://coveralls.io/repos/github/laminas/laminas-psr7bridge/badge.svg?branch=master)](https://coveralls.io/github/laminas/laminas-psr7bridge?branch=master)
+[![Build Status](https://github.com/laminas/laminas-psr7bridge/workflows/Continuous%20Integration/badge.svg)](https://github.com/laminas/laminas-psr7bridge/actions?query=workflow%3A"Continuous+Integration")
 
 Code for converting [PSR-7](http://www.php-fig.org/psr/psr-7/) messages to
 [laminas-http](https://docs.laminas.dev/laminas-http) messages, and vice
