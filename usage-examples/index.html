@@ -280,7 +280,7 @@ arguments:</p>
 not need this more process-intensive data. By default, the <code>$shallow</code> flag is
 <code>false</code>, meaning a full conversion is done.</p>
 <h2 id="examples">Examples</h2>
-<h3>Full conversion to laminas-http request</h3>
+<h3 id="full-conversion-to-laminas-http-request">Full conversion to laminas-http request</h3>
 <pre class="highlight"><code class="language-php">use Laminas\Http\PhpEnvironment\Response;
 use Laminas\Psr7Bridge\Psr7ServerRequest;
 
@@ -289,7 +289,7 @@ $result = $controller-&gt;dispatch(
     Psr7ServerRequest::toLaminas($request),
     new Response()
 );</code></pre>
-<h3>Shallow conversion to laminas-http request</h3>
+<h3 id="shallow-conversion-to-laminas-http-request">Shallow conversion to laminas-http request</h3>
 <pre class="highlight"><code class="language-php">use Laminas\Psr7Bridge\Psr7ServerRequest;
 
 // Assume $router is a Laminas\Router\Http\TreeRouteStack instance.
