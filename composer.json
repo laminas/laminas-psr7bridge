@@ -1,7 +1,6 @@
 {
     "name": "laminas/laminas-psr7bridge",
     "description": "PSR-7 &lt;-&gt; laminas-http message conversions",
-    "license": "BSD-3-Clause",
     "keywords": [
         "laminas",
         "http",
@@ -9,19 +8,7 @@
         "psr-7"
     ],
     "homepage": "https://laminas.dev",
-    "support": {
-        "docs": "https://docs.laminas.dev/laminas-psr7bridge/",
-        "issues": "https://github.com/laminas/laminas-psr7bridge/issues",
-        "source": "https://github.com/laminas/laminas-psr7bridge",
-        "rss": "https://github.com/laminas/laminas-psr7bridge/releases.atom",
-        "chat": "https://laminas.dev/chat",
-        "forum": "https://discourse.laminas.dev"
-    },
-    "config": {
-        "sort-packages": true
-    },
-    "extra": {
-    },
+    "license": "BSD-3-Clause",
     "require": {
         "php": "^7.3 || ~8.0.0",
         "laminas/laminas-diactoros": "^1.7 || ^2.0",
@@ -29,13 +16,20 @@
         "laminas/laminas-zendframework-bridge": "^1.0",
         "psr/http-message": "^1.0"
     },
-    "require-dev": {
-        "laminas/laminas-coding-standard": "~1.0.0",
-        "phpunit/phpunit": "^9.4.1"
+    "replace": {
+        "zendframework/zend-psr7bridge": "^1.2.0"
     },
     "conflict": {
         "laminas/laminas-stdlib": "< 3.2.1"
     },
+    "require-dev": {
+        "laminas/laminas-coding-standard": "~1.0.0",
+        "phpunit/phpunit": "^9.4.1"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {},
     "autoload": {
         "psr-4": {
             "Laminas\\Psr7Bridge\\": "src/"
@@ -56,7 +50,12 @@
         "test": "phpunit --colors=always",
         "test-coverage": "phpunit --colors=always --coverage-clover clover.xml"
     },
-    "replace": {
-        "zendframework/zend-psr7bridge": "^1.2.0"
+    "support": {
+        "issues": "https://github.com/laminas/laminas-psr7bridge/issues",
+        "forum": "https://discourse.laminas.dev",
+        "chat": "https://laminas.dev/chat",
+        "source": "https://github.com/laminas/laminas-psr7bridge",
+        "docs": "https://docs.laminas.dev/laminas-psr7bridge/",
+        "rss": "https://github.com/laminas/laminas-psr7bridge/releases.atom"
     }
 }
