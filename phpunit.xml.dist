@@ -4,6 +4,7 @@
         xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit//phpunit.xsd"
         backupGlobals="true"
         bootstrap="vendor/autoload.php"
+        convertDeprecationsToExceptions="true"
         colors="true">
   <coverage processUncoveredFiles="true">
     <include>
