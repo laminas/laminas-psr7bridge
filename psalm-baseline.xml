@@ -1,0 +1,396 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<files psalm-version="4.11.2@6fba5eb554f9507b72932f9c75533d8af593688d">
+  <file src="src/Laminas/Request.php">
+    <MixedArgument occurrences="1">
+      <code>$value</code>
+    </MixedArgument>
+    <MixedArgumentTypeCoercion occurrences="1">
+      <code>$name</code>
+    </MixedArgumentTypeCoercion>
+    <MixedAssignment occurrences="2">
+      <code>$value</code>
+      <code>$values</code>
+    </MixedAssignment>
+    <PossiblyInvalidMethodCall occurrences="2">
+      <code>addHeader</code>
+      <code>addHeaderLine</code>
+    </PossiblyInvalidMethodCall>
+    <PossiblyUndefinedMethod occurrences="2">
+      <code>addHeader</code>
+      <code>addHeaderLine</code>
+    </PossiblyUndefinedMethod>
+    <PropertyNotSetInConstructor occurrences="8">
+      <code>Request</code>
+      <code>Request</code>
+      <code>Request</code>
+      <code>Request</code>
+      <code>Request</code>
+      <code>Request</code>
+      <code>Request</code>
+      <code>Request</code>
+    </PropertyNotSetInConstructor>
+  </file>
+  <file src="src/Psr7Response.php">
+    <MissingReturnType occurrences="2">
+      <code>fromZend</code>
+      <code>toZend</code>
+    </MissingReturnType>
+    <MixedArgument occurrences="3">
+      <code>$uri</code>
+      <code>func_get_args()</code>
+      <code>func_get_args()</code>
+    </MixedArgument>
+    <MixedAssignment occurrences="1">
+      <code>$uri</code>
+    </MixedAssignment>
+    <PossiblyInvalidArgument occurrences="1">
+      <code>$uri</code>
+    </PossiblyInvalidArgument>
+    <PossiblyInvalidCast occurrences="1">
+      <code>$uri</code>
+    </PossiblyInvalidCast>
+  </file>
+  <file src="src/Psr7ServerRequest.php">
+    <InvalidDocblock occurrences="2">
+      <code>private static function convertFilesToUploaded(array $files)</code>
+      <code>private static function convertUploadedFiles(array $uploadedFiles)</code>
+    </InvalidDocblock>
+    <MissingParamType occurrences="1">
+      <code>$shallow</code>
+    </MissingParamType>
+    <MissingReturnType occurrences="4">
+      <code>convertFilesToUploaded</code>
+      <code>convertUploadedFiles</code>
+      <code>fromZend</code>
+      <code>toZend</code>
+    </MissingReturnType>
+    <MixedArgument occurrences="15">
+      <code>$files</code>
+      <code>$files['error']</code>
+      <code>$files['name']</code>
+      <code>$files['size']</code>
+      <code>$files['tmp_name']</code>
+      <code>$files['type']</code>
+      <code>$headers</code>
+      <code>$laminasRequest-&gt;getContent()</code>
+      <code>$laminasRequest-&gt;getServer()</code>
+      <code>$post</code>
+      <code>$query</code>
+      <code>func_get_args()</code>
+      <code>func_get_args()</code>
+      <code>self::convertFilesToUploaded($files)</code>
+      <code>self::convertUploadedFiles($psr7Request-&gt;getUploadedFiles())</code>
+    </MixedArgument>
+    <MixedAssignment occurrences="9">
+      <code>$files</code>
+      <code>$files[$name]</code>
+      <code>$headers</code>
+      <code>$post</code>
+      <code>$query</code>
+      <code>$upload</code>
+      <code>$uploadError</code>
+      <code>$uploadedFiles[$name]</code>
+      <code>$value</code>
+    </MixedAssignment>
+    <MixedMethodCall occurrences="9">
+      <code>getClientFilename</code>
+      <code>getClientMediaType</code>
+      <code>getError</code>
+      <code>getMetadata</code>
+      <code>getSize</code>
+      <code>getStream</code>
+      <code>toArray</code>
+      <code>toArray</code>
+      <code>toArray</code>
+    </MixedMethodCall>
+    <PossiblyInvalidArgument occurrences="1">
+      <code>$psr7Request-&gt;getParsedBody() ?: []</code>
+    </PossiblyInvalidArgument>
+    <PossiblyInvalidMethodCall occurrences="2">
+      <code>getArrayCopy</code>
+      <code>toArray</code>
+    </PossiblyInvalidMethodCall>
+    <PossiblyUndefinedMethod occurrences="1">
+      <code>toArray</code>
+    </PossiblyUndefinedMethod>
+  </file>
+  <file src="test/Laminas/RequestTest.php">
+    <MissingReturnType occurrences="1">
+      <code>testConstructor</code>
+    </MissingReturnType>
+  </file>
+  <file src="test/Psr7ResponseTest.php">
+    <InaccessibleMethod occurrences="1">
+      <code>new Psr7Response()</code>
+    </InaccessibleMethod>
+    <MissingParamType occurrences="10">
+      <code>$body</code>
+      <code>$body</code>
+      <code>$body</code>
+      <code>$headers</code>
+      <code>$headers</code>
+      <code>$headers</code>
+      <code>$response</code>
+      <code>$status</code>
+      <code>$status</code>
+      <code>$status</code>
+    </MissingParamType>
+    <MissingReturnType occurrences="8">
+      <code>getResponseData</code>
+      <code>getResponseString</code>
+      <code>testConvertedHeadersAreInstanceOfTheirAppropriateClasses</code>
+      <code>testPrivateConstruct</code>
+      <code>testResponseFromLaminas</code>
+      <code>testResponseToLaminas</code>
+      <code>testResponseToLaminasFromRealStream</code>
+      <code>testResponseToLaminasWithMemoryStream</code>
+    </MissingReturnType>
+    <MixedArgument occurrences="18">
+      <code>$body</code>
+      <code>$body</code>
+      <code>$body</code>
+      <code>$headers</code>
+      <code>$headers</code>
+      <code>$headers</code>
+      <code>$laminasHeaders[$type]</code>
+      <code>$laminasHeaders[$type]</code>
+      <code>$laminasHeaders[$type]</code>
+      <code>$laminasHeaders[$type]</code>
+      <code>$response</code>
+      <code>$status</code>
+      <code>$status</code>
+      <code>$status</code>
+      <code>$value</code>
+      <code>$value</code>
+      <code>$value</code>
+      <code>$value</code>
+    </MixedArgument>
+    <MixedAssignment occurrences="8">
+      <code>$value</code>
+      <code>$value</code>
+      <code>$value</code>
+      <code>$value</code>
+      <code>$values</code>
+      <code>$values</code>
+      <code>$values</code>
+      <code>$values</code>
+    </MixedAssignment>
+    <PossiblyUndefinedMethod occurrences="1">
+      <code>$cookies</code>
+    </PossiblyUndefinedMethod>
+    <RedundantCastGivenDocblockType occurrences="3">
+      <code>(string)$laminasResponse-&gt;getBody()</code>
+      <code>(string)$laminasResponse-&gt;getBody()</code>
+      <code>(string)$laminasResponse-&gt;getBody()</code>
+    </RedundantCastGivenDocblockType>
+  </file>
+  <file src="test/Psr7ServerRequestTest.php">
+    <InaccessibleMethod occurrences="1">
+      <code>new Psr7ServerRequest()</code>
+    </InaccessibleMethod>
+    <MissingParamType occurrences="9">
+      <code>$body</code>
+      <code>$files</code>
+      <code>$headers</code>
+      <code>$laminas</code>
+      <code>$method</code>
+      <code>$post</code>
+      <code>$psr7</code>
+      <code>$query</code>
+      <code>$uri</code>
+    </MissingParamType>
+    <MissingReturnType occurrences="13">
+      <code>compareUploadedFiles</code>
+      <code>getResponseData</code>
+      <code>testBaseUrlFromGlobal</code>
+      <code>testCanCastErroneousUploadToLaminasRequest</code>
+      <code>testCanCastFullRequestToLaminas</code>
+      <code>testCustomHttpMethodsDoNotRaiseAnExceptionDuringConversionToLaminasRequest</code>
+      <code>testFromLaminas</code>
+      <code>testFromLaminasCanHandleNullContent</code>
+      <code>testFromLaminasConvertsCookies</code>
+      <code>testNestedFileParametersArePassedCorrectlyToLaminasRequest</code>
+      <code>testPrivateConstruct</code>
+      <code>testServerParams</code>
+      <code>testToLaminasWithShallowOmitsBody</code>
+    </MissingReturnType>
+    <MixedArgument occurrences="38">
+      <code>$files</code>
+      <code>$headers</code>
+      <code>$laminas</code>
+      <code>$laminasRequest-&gt;getFiles()</code>
+      <code>$laminasRequest-&gt;getPost()</code>
+      <code>$method</code>
+      <code>$post</code>
+      <code>$psr7</code>
+      <code>$psr7Headers[$key]</code>
+      <code>$query</code>
+      <code>$test</code>
+      <code>$test</code>
+      <code>$test</code>
+      <code>$test</code>
+      <code>$test</code>
+      <code>$test</code>
+      <code>$upload</code>
+      <code>$upload</code>
+      <code>$upload</code>
+      <code>$upload</code>
+      <code>$upload</code>
+      <code>$upload</code>
+      <code>$upload</code>
+      <code>$upload</code>
+      <code>$upload</code>
+      <code>$upload</code>
+      <code>$upload</code>
+      <code>$upload[0]</code>
+      <code>$upload[0]</code>
+      <code>$upload[0]</code>
+      <code>$upload[0]</code>
+      <code>$upload[0]</code>
+      <code>$upload[1]</code>
+      <code>$upload[1]</code>
+      <code>$upload[1]</code>
+      <code>$upload[1]</code>
+      <code>$upload[1]</code>
+      <code>$uri</code>
+    </MixedArgument>
+    <MixedArrayAccess occurrences="22">
+      <code>$laminas[$name]</code>
+      <code>$laminas['error']</code>
+      <code>$laminas['name']</code>
+      <code>$laminas['size']</code>
+      <code>$laminas['tmp_name']</code>
+      <code>$laminas['type']</code>
+      <code>$psr7[$name]</code>
+      <code>$upload['error']</code>
+      <code>$upload['name']</code>
+      <code>$upload['size']</code>
+      <code>$upload['tmp_name']</code>
+      <code>$upload['type']</code>
+      <code>$upload[0]['error']</code>
+      <code>$upload[0]['name']</code>
+      <code>$upload[0]['size']</code>
+      <code>$upload[0]['tmp_name']</code>
+      <code>$upload[0]['type']</code>
+      <code>$upload[1]['error']</code>
+      <code>$upload[1]['name']</code>
+      <code>$upload[1]['size']</code>
+      <code>$upload[1]['tmp_name']</code>
+      <code>$upload[1]['type']</code>
+    </MixedArrayAccess>
+    <MixedArrayOffset occurrences="3">
+      <code>$laminas[$name]</code>
+      <code>$psr7Headers[$key]</code>
+      <code>$psr7[$name]</code>
+    </MixedArrayOffset>
+    <MixedAssignment occurrences="9">
+      <code>$key</code>
+      <code>$name</code>
+      <code>$test</code>
+      <code>$test</code>
+      <code>$test</code>
+      <code>$upload</code>
+      <code>$upload</code>
+      <code>$value</code>
+      <code>$value</code>
+    </MixedAssignment>
+    <MixedMethodCall occurrences="26">
+      <code>fromArray</code>
+      <code>fromArray</code>
+      <code>fromArray</code>
+      <code>get</code>
+      <code>get</code>
+      <code>get</code>
+      <code>get</code>
+      <code>get</code>
+      <code>get</code>
+      <code>getArrayCopy</code>
+      <code>getArrayCopy</code>
+      <code>getClientFilename</code>
+      <code>getClientMediaType</code>
+      <code>getError</code>
+      <code>getFieldValue</code>
+      <code>getFieldValue</code>
+      <code>getFieldValue</code>
+      <code>getFieldValue</code>
+      <code>getFieldValue</code>
+      <code>getFieldValue</code>
+      <code>getFieldValue</code>
+      <code>getFieldValue</code>
+      <code>getFieldValue</code>
+      <code>getMetadata</code>
+      <code>getSize</code>
+      <code>getStream</code>
+    </MixedMethodCall>
+    <PossiblyInvalidMethodCall occurrences="29">
+      <code>addHeader</code>
+      <code>addHeaders</code>
+      <code>get</code>
+      <code>get</code>
+      <code>get</code>
+      <code>get</code>
+      <code>get</code>
+      <code>get</code>
+      <code>get</code>
+      <code>get</code>
+      <code>get</code>
+      <code>get</code>
+      <code>get</code>
+      <code>get</code>
+      <code>get</code>
+      <code>get</code>
+      <code>get</code>
+      <code>has</code>
+      <code>has</code>
+      <code>has</code>
+      <code>has</code>
+      <code>has</code>
+      <code>has</code>
+      <code>has</code>
+      <code>has</code>
+      <code>has</code>
+      <code>has</code>
+      <code>has</code>
+      <code>has</code>
+    </PossiblyInvalidMethodCall>
+    <PossiblyUndefinedMethod occurrences="28">
+      <code>addHeader</code>
+      <code>addHeaders</code>
+      <code>get</code>
+      <code>get</code>
+      <code>get</code>
+      <code>get</code>
+      <code>get</code>
+      <code>get</code>
+      <code>get</code>
+      <code>get</code>
+      <code>get</code>
+      <code>get</code>
+      <code>get</code>
+      <code>get</code>
+      <code>getArrayCopy</code>
+      <code>getArrayCopy</code>
+      <code>has</code>
+      <code>has</code>
+      <code>has</code>
+      <code>has</code>
+      <code>has</code>
+      <code>has</code>
+      <code>has</code>
+      <code>has</code>
+      <code>has</code>
+      <code>has</code>
+      <code>has</code>
+      <code>has</code>
+    </PossiblyUndefinedMethod>
+    <RedundantCastGivenDocblockType occurrences="2">
+      <code>(string) $laminasRequest-&gt;getContent()</code>
+      <code>(string) $laminasRequest-&gt;getContent()</code>
+    </RedundantCastGivenDocblockType>
+    <UndefinedInterfaceMethod occurrences="3">
+      <code>get</code>
+      <code>get</code>
+      <code>get</code>
+    </UndefinedInterfaceMethod>
+  </file>
+</files>
