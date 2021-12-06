@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5d72a9429b5f057cc93e9a1b32f81374",
+    "content-hash": "224d5e589905a584484d96653de375e8",
     "packages": [
         {
             "name": "container-interop/container-interop",
@@ -4592,6 +4592,7 @@
                 "issues": "https://github.com/webmozart/path-util/issues",
                 "source": "https://github.com/webmozart/path-util/tree/2.3.0"
             },
+            "abandoned": "symfony/filesystem",
             "time": "2015-12-17T08:42:14+00:00"
         }
     ],
