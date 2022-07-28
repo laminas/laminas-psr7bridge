@@ -121,7 +121,7 @@ final class Psr7ServerRequest
      * Convert a Laminas\Http file structure to PSR-7 uploaded files
      *
      * @param array
-     * @return UploadedFile[]
+     * @return UploadedFile[]|UploadedFile
      */
     private static function convertFilesToUploaded(array $files)
     {
