@@ -8,19 +8,24 @@ use Laminas\Diactoros\UploadedFile;
 use Laminas\Http\PhpEnvironment\Request as LaminasPhpEnvironmentRequest;
 use Laminas\Http\Request as LaminasRequest;
 use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Message\UploadedFileInterface;
+
+use function func_get_args;
+use function is_array;
+use function iterator_to_array;
+
+use const UPLOAD_ERR_OK;
 
 final class Psr7ServerRequest
 {
     /**
      * Convert a PSR-7 ServerRequest to a Laminas\Http server-side request.
      *
-     * @param ServerRequestInterface $psr7Request
      * @param bool $shallow Whether or not to convert without body/file
      *     parameters; defaults to false, meaning a fully populated request
      *     is returned.
-     * @return Laminas\Request
      */
-    public static function toLaminas(ServerRequestInterface $psr7Request, $shallow = false)
+    public static function toLaminas(ServerRequestInterface $psr7Request, $shallow = false): Laminas\Request
     {
         if ($shallow) {
             return new Laminas\Request(
@@ -52,11 +57,8 @@ final class Psr7ServerRequest
 
     /**
      * Convert a Laminas\Http\Response in a PSR-7 response, using laminas-diactoros
-     *
-     * @param  LaminasRequest $laminasRequest
-     * @return ServerRequest
      */
-    public static function fromLaminas(LaminasRequest $laminasRequest)
+    public static function fromLaminas(LaminasRequest $laminasRequest): ServerRequest
     {
         $body = new Stream('php://memory', 'wb+');
         if ($laminasRequest->getContent() !== null) {
@@ -91,7 +93,7 @@ final class Psr7ServerRequest
     /**
      * Convert a PSR-7 uploaded files structure to a $_FILES structure
      *
-     * @param \Psr\Http\Message\UploadedFileInterface[]
+     * @param UploadedFileInterface[] $uploadedFiles
      * @return array
      */
     private static function convertUploadedFiles(array $uploadedFiles)
@@ -103,7 +105,7 @@ final class Psr7ServerRequest
                 continue;
             }
 
-            $uploadError = $upload->getError();
+            $uploadError   = $upload->getError();
             $isUploadError = $uploadError !== UPLOAD_ERR_OK;
 
             $files[$name] = [
@@ -120,7 +122,7 @@ final class Psr7ServerRequest
     /**
      * Convert a Laminas\Http file structure to PSR-7 uploaded files
      *
-     * @param array
+     * @param array $files
      * @return UploadedFile[]|UploadedFile
      */
     private static function convertFilesToUploaded(array $files)
@@ -151,8 +153,10 @@ final class Psr7ServerRequest
 
     /**
      * @deprecated Use self::toLaminas instead
+     *
+     * @param bool $shallow
      */
-    public static function toZend(ServerRequestInterface $psr7Request, $shallow = false)
+    public static function toZend(ServerRequestInterface $psr7Request, $shallow = false): Laminas\Request
     {
         return self::toLaminas(...func_get_args());
     }
@@ -160,7 +164,7 @@ final class Psr7ServerRequest
     /**
      * @deprecated Use self::fromLaminas instead
      */
-    public static function fromZend(LaminasRequest $laminasRequest)
+    public static function fromZend(LaminasRequest $laminasRequest): ServerRequest
     {
         return self::fromLaminas(...func_get_args());
     }

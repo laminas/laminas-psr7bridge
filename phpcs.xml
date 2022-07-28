@@ -2,6 +2,11 @@
 <ruleset name="Laminas coding standard">
     <rule ref="LaminasCodingStandard"/>
 
+    <rule ref="SlevomatCodingStandard.TypeHints.DeclareStrictTypes.DeclareStrictTypesMissing">
+        <!-- strict types are too risky to introduce in existing sources here, and have been disabled, for now -->
+        <exclude-pattern>src/</exclude-pattern>
+    </rule>
+
     <!-- Paths to check -->
     <file>src</file>
     <file>test</file>
