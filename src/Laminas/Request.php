@@ -7,16 +7,16 @@ use Laminas\Http\PhpEnvironment\Request as BaseRequest;
 use Laminas\Stdlib\Parameters;
 use Psr\Http\Message\UriInterface;
 
+use function preg_replace;
+
 class Request extends BaseRequest
 {
     /**
-     * Overload constructor.
-     *
      * This method overloads the original constructor to accept the various
      * request metadata instead of pulling from superglobals.
      *
      * @param string $method
-     * @param string|\Psr\Http\Message\UriInterface $uri
+     * @param string|UriInterface $uri
      * @param array $headers
      * @param array $cookies
      * @param array $queryStringArguments

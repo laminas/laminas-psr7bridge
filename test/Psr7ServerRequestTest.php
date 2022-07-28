@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace LaminasTest\Psr7Bridge;
 
 use Error;
@@ -12,12 +14,24 @@ use Laminas\Http\Request as LaminasRequest;
 use Laminas\Psr7Bridge\Laminas\Request as BridgeRequest;
 use Laminas\Psr7Bridge\Psr7ServerRequest;
 use Laminas\Stdlib\Parameters;
-use PHPUnit\Framework\TestCase as TestCase;
+use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\UploadedFileInterface;
+
+use function basename;
+use function count;
+use function file_get_contents;
+use function fopen;
+use function is_array;
+use function preg_replace;
+use function sprintf;
+use function uniqid;
+
+use const UPLOAD_ERR_NO_FILE;
+use const UPLOAD_ERR_OK;
 
 class Psr7ServerRequestTest extends TestCase
 {
-    public function testToLaminasWithShallowOmitsBody()
+    public function testToLaminasWithShallowOmitsBody(): void
     {
         $server = [
             'SCRIPT_NAME'     => __FILE__,
@@ -34,16 +48,16 @@ class Psr7ServerRequestTest extends TestCase
             ),
         ];
 
-        $uri = 'https://example.com/foo/bar?baz=bat';
+        $uri        = 'https://example.com/foo/bar?baz=bat';
         $requestUri = '/foo/bar?baz=bat';
-        $method = 'PATCH';
+        $method     = 'PATCH';
 
         $body = fopen(__FILE__, 'r');
 
         $headers = [
-            'Host'         => [ 'example.com' ],
-            'X-Foo'        => [ 'bar' ],
-            'Content-Type' => [ 'multipart/form-data' ],
+            'Host'         => ['example.com'],
+            'X-Foo'        => ['bar'],
+            'Content-Type' => ['multipart/form-data'],
         ];
 
         $cookies = [
@@ -106,7 +120,7 @@ class Psr7ServerRequestTest extends TestCase
         $this->assertEquals(__FILE__, $test->get('SCRIPT_FILENAME'));
     }
 
-    public function testCanCastFullRequestToLaminas()
+    public function testCanCastFullRequestToLaminas(): void
     {
         $server = [
             'SCRIPT_NAME'     => __FILE__,
@@ -123,7 +137,7 @@ class Psr7ServerRequestTest extends TestCase
             ),
         ];
 
-        $uri = 'https://example.com/foo/bar?baz=bat';
+        $uri        = 'https://example.com/foo/bar?baz=bat';
         $requestUri = preg_replace('#^[^/:]+://[^/]+#', '', $uri);
 
         $method = 'PATCH';
@@ -131,9 +145,9 @@ class Psr7ServerRequestTest extends TestCase
         $body = fopen(__FILE__, 'r');
 
         $headers = [
-            'Host'         => [ 'example.com' ],
-            'X-Foo'        => [ 'bar' ],
-            'Content-Type' => [ 'multipart/form-data' ],
+            'Host'         => ['example.com'],
+            'X-Foo'        => ['bar'],
+            'Content-Type' => ['multipart/form-data'],
         ];
 
         $cookies = [
@@ -203,8 +217,7 @@ class Psr7ServerRequestTest extends TestCase
         $this->assertEquals(__FILE__, $test->get('SCRIPT_FILENAME'));
     }
 
-
-    public function testCanCastErroneousUploadToLaminasRequest()
+    public function testCanCastErroneousUploadToLaminasRequest(): void
     {
         $server = [
             'SCRIPT_NAME'     => __FILE__,
@@ -221,7 +234,7 @@ class Psr7ServerRequestTest extends TestCase
             ),
         ];
 
-        $uri = 'https://example.com/foo/bar?baz=bat';
+        $uri        = 'https://example.com/foo/bar?baz=bat';
         $requestUri = preg_replace('#^[^/:]+://[^/]+#', '', $uri);
 
         $method = 'PATCH';
@@ -229,9 +242,9 @@ class Psr7ServerRequestTest extends TestCase
         $body = fopen(__FILE__, 'r');
 
         $headers = [
-            'Host'         => [ 'example.com' ],
-            'X-Foo'        => [ 'bar' ],
-            'Content-Type' => [ 'multipart/form-data' ],
+            'Host'         => ['example.com'],
+            'X-Foo'        => ['bar'],
+            'Content-Type' => ['multipart/form-data'],
         ];
 
         $cookies = [
@@ -306,7 +319,7 @@ class Psr7ServerRequestTest extends TestCase
         $this->assertEquals(__FILE__, $test->get('SCRIPT_FILENAME'));
     }
 
-    public function testNestedFileParametersArePassedCorrectlyToLaminasRequest()
+    public function testNestedFileParametersArePassedCorrectlyToLaminasRequest(): void
     {
         $uploadedFiles = [
             'foo-bar' => [
@@ -324,7 +337,7 @@ class Psr7ServerRequestTest extends TestCase
                     basename(__FILE__),
                     'plain/text'
                 ),
-            ]
+            ],
         ];
 
         $psr7Request = new ServerRequest([], $uploadedFiles);
@@ -370,7 +383,7 @@ class Psr7ServerRequestTest extends TestCase
         $this->assertEquals(UPLOAD_ERR_OK, $upload[1]['error']);
     }
 
-    public function testCustomHttpMethodsDoNotRaiseAnExceptionDuringConversionToLaminasRequest()
+    public function testCustomHttpMethodsDoNotRaiseAnExceptionDuringConversionToLaminasRequest(): void
     {
         $psr7Request = new ServerRequest([], [], null, 'CUSTOM_METHOD');
 
@@ -378,15 +391,26 @@ class Psr7ServerRequestTest extends TestCase
         $this->assertSame('CUSTOM_METHOD', $laminasRequest->getMethod());
     }
 
-    public function getResponseData()
+    /**
+     * @return non-empty-list<array{
+     *     non-empty-string,
+     *     non-empty-string,
+     *     array<non-empty-string, string>,
+     *     string,
+     *     array<non-empty-string, string>,
+     *     mixed[],
+     *     mixed[],
+     * }>
+     */
+    public function getResponseData(): array
     {
         return [
             [
                 'https://getlaminas.org/', // uri
                 'GET', // http method
-                [ 'Content-Type' => 'text/html' ], // headers
+                ['Content-Type' => 'text/html'], // headers
                 '<html></html>', // body
-                [ 'foo' => 'bar' ], // query params
+                ['foo' => 'bar'], // query params
                 [], // post
                 [], // files
             ],
@@ -395,64 +419,75 @@ class Psr7ServerRequestTest extends TestCase
                 'POST', // http method
                 [
                     'Content-Type' => 'application/x-www-form-urlencoded',
-                    'Cookie' => sprintf("PHPSESSID=%s; foo=bar", uniqid())
+                    'Cookie'       => sprintf("PHPSESSID=%s; foo=bar", uniqid()),
                 ], // headers
                 '', // body
-                [ 'foo' => 'bar' ], // query params
-                [ 'baz' => 'bar' ], // post
+                ['foo' => 'bar'], // query params
+                ['baz' => 'bar'], // post
                 [], // files
             ],
             [
                 'https://getlaminas.org/', // uri
                 'POST', // http method
-                [ 'Content-Type' => 'multipart/form-data' ], // headers
+                ['Content-Type' => 'multipart/form-data'], // headers
                 file_get_contents(__FILE__), // body
-                [ 'foo' => 'bar' ], // query params
+                ['foo' => 'bar'], // query params
                 [], // post
                 [
                     'file' => [
                         'test1' => [
-                            'name' => 'test1.txt',
-                            'type' => 'text/plain',
+                            'name'     => 'test1.txt',
+                            'type'     => 'text/plain',
                             'tmp_name' => __FILE__,
-                            'error' => 0,
-                            'size' => 1,
+                            'error'    => 0,
+                            'size'     => 1,
                         ],
                         'test2' => [
-                            'name' => 'test2.txt',
-                            'type' => 'text/plain',
+                            'name'     => 'test2.txt',
+                            'type'     => 'text/plain',
                             'tmp_name' => __FILE__,
-                            'error' => 0,
-                            'size' => 1,
-                        ]
-                    ]
+                            'error'    => 0,
+                            'size'     => 1,
+                        ],
+                    ],
                 ], // files
             ],
             [
                 'https://getlaminas.org/', // uri
                 'POST', // http method
-                [ 'Content-Type' => 'multipart/form-data' ], // headers
+                ['Content-Type' => 'multipart/form-data'], // headers
                 file_get_contents(__FILE__), // body
-                [ 'foo' => 'bar' ], // query params
+                ['foo' => 'bar'], // query params
                 [], // post
                 [
                     'file' => [
-                        'name' => 'test2.txt',
-                        'type' => 'text/plain',
+                        'name'     => 'test2.txt',
+                        'type'     => 'text/plain',
                         'tmp_name' => __FILE__,
-                        'error' => 0,
-                        'size' => 1,
-                    ]
+                        'error'    => 0,
+                        'size'     => 1,
+                    ],
                 ], // files
-            ]
+            ],
         ];
     }
 
     /**
      * @dataProvider getResponseData
+     * @param array<non-empty-string, string> $headers
+     * @param array<non-empty-string, string> $query
+     * @param mixed[]                         $post
+     * @param mixed[]                         $files
      */
-    public function testFromLaminas($uri, $method, $headers, $body, $query, $post, $files)
-    {
+    public function testFromLaminas(
+        string $uri,
+        string $method,
+        array $headers,
+        string $body,
+        array $query,
+        array $post,
+        array $files
+    ): void {
         $laminasRequest = new LaminasRequest();
         $laminasRequest->setUri($uri);
         $laminasRequest->setMethod($method);
@@ -483,7 +518,11 @@ class Psr7ServerRequestTest extends TestCase
         $this->compareUploadedFiles($files, $psr7Request->getUploadedFiles());
     }
 
-    private function compareUploadedFiles($laminas, $psr7)
+    /**
+     * @param mixed[]                     $laminas note: structure is nested/recursive/complex, therefore not well-typed
+     * @param UploadedFileInterface|array $psr7
+     */
+    private function compareUploadedFiles($laminas, $psr7): void
     {
         if (! $psr7 instanceof UploadedFileInterface) {
             $this->assertEquals(count($laminas), count($psr7), 'number of files should be same');
@@ -506,7 +545,7 @@ class Psr7ServerRequestTest extends TestCase
 
     public function testFromLaminasConvertsCookies()
     {
-        $request = new LaminasRequest();
+        $request           = new LaminasRequest();
         $laminasCookieData = ['foo' => 'test', 'bar' => 'test 2'];
         $request->getHeaders()->addHeader(new Cookie($laminasCookieData));
 
@@ -537,17 +576,17 @@ class Psr7ServerRequestTest extends TestCase
     public function testBaseUrlFromGlobal()
     {
         $_SERVER = [
-            'HTTP_HOST' => 'host.com',
-            'SERVER_PORT' => '80',
-            'REQUEST_URI' => '/test/path/here?foo=bar',
+            'HTTP_HOST'       => 'host.com',
+            'SERVER_PORT'     => '80',
+            'REQUEST_URI'     => '/test/path/here?foo=bar',
             'SCRIPT_FILENAME' => '/c/root/test/path/here/index.php',
-            'PHP_SELF' => '/test/path/here/index.php',
-            'SCRIPT_NAME' => '/test/path/here/index.php',
-            'QUERY_STRING' => 'foo=bar'
+            'PHP_SELF'        => '/test/path/here/index.php',
+            'SCRIPT_NAME'     => '/test/path/here/index.php',
+            'QUERY_STRING'    => 'foo=bar',
         ];
 
-        $psr7 = ServerRequestFactory::fromGlobals();
-        $converted = Psr7ServerRequest::toLaminas($psr7);
+        $psr7           = ServerRequestFactory::fromGlobals();
+        $converted      = Psr7ServerRequest::toLaminas($psr7);
         $laminasRequest = new Request();
 
         $this->assertSame($laminasRequest->getBaseUrl(), $converted->getBaseUrl());

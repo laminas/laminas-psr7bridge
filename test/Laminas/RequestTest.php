@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace LaminasTest\Psr7Bridge\Laminas;
 
 use Laminas\Psr7Bridge\Laminas\Request;
 use Laminas\Uri\Http as Uri;
-use PHPUnit\Framework\TestCase as TestCase;
+use PHPUnit\Framework\TestCase;
 
 class RequestTest extends TestCase
 {
