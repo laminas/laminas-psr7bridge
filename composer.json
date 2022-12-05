@@ -37,8 +37,8 @@
     "require-dev": {
         "laminas/laminas-coding-standard": "~2.4.0",
         "phpunit/phpunit": "^9.5.26",
-        "psalm/plugin-phpunit": "^0.18.0",
-        "vimeo/psalm": "^5.0.0"
+        "psalm/plugin-phpunit": "^0.18.4",
+        "vimeo/psalm": "^5.1"
     },
     "conflict": {
         "laminas/laminas-stdlib": "< 3.2.1",
