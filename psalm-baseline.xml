@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="4.24.0@06dd975cb55d36af80f242561738f16c5f58264f">
+<files psalm-version="5.1.0@4defa177c89397c5e14737a80fe4896584130674">
   <file src="src/Laminas/Request.php">
     <MixedArgument occurrences="1">
       <code>$value</code>
@@ -56,7 +56,7 @@
     <InvalidReturnType occurrences="1">
       <code>UploadedFile[]|UploadedFile</code>
     </InvalidReturnType>
-    <MixedArgument occurrences="14">
+    <MixedArgument occurrences="15">
       <code>$files</code>
       <code>$files['error']</code>
       <code>$files['name']</code>
@@ -69,6 +69,7 @@
       <code>$post</code>
       <code>$query</code>
       <code>$upload</code>
+      <code>func_get_args()</code>
       <code>func_get_args()</code>
       <code>func_get_args()</code>
     </MixedArgument>
@@ -137,15 +138,6 @@
     <InaccessibleMethod occurrences="1">
       <code>new Psr7ServerRequest()</code>
     </InaccessibleMethod>
-    <MissingParamType occurrences="7">
-      <code>$body</code>
-      <code>$files</code>
-      <code>$headers</code>
-      <code>$method</code>
-      <code>$post</code>
-      <code>$query</code>
-      <code>$uri</code>
-    </MissingParamType>
     <MissingReturnType occurrences="5">
       <code>testBaseUrlFromGlobal</code>
       <code>testFromLaminasCanHandleNullContent</code>
@@ -153,16 +145,11 @@
       <code>testPrivateConstruct</code>
       <code>testServerParams</code>
     </MissingReturnType>
-    <MixedArgument occurrences="37">
-      <code>$files</code>
-      <code>$headers</code>
+    <MixedArgument occurrences="31">
       <code>$laminasRequest-&gt;getFiles()</code>
       <code>$laminasRequest-&gt;getPost()</code>
       <code>$laminas[$name]</code>
-      <code>$method</code>
-      <code>$post</code>
       <code>$psr7[$name]</code>
-      <code>$query</code>
       <code>$test</code>
       <code>$test</code>
       <code>$test</code>
@@ -190,7 +177,6 @@
       <code>$upload[1]</code>
       <code>$upload[1]</code>
       <code>$upload[1]</code>
-      <code>$uri</code>
     </MixedArgument>
     <MixedArrayAccess occurrences="15">
       <code>$upload['error']</code>
@@ -209,17 +195,12 @@
       <code>$upload[1]['tmp_name']</code>
       <code>$upload[1]['type']</code>
     </MixedArrayAccess>
-    <MixedArrayOffset occurrences="1">
-      <code>$psr7Headers[$key]</code>
-    </MixedArrayOffset>
-    <MixedAssignment occurrences="8">
-      <code>$key</code>
+    <MixedAssignment occurrences="6">
       <code>$test</code>
       <code>$test</code>
       <code>$test</code>
       <code>$upload</code>
       <code>$upload</code>
-      <code>$value</code>
       <code>$value</code>
     </MixedAssignment>
     <MixedMethodCall occurrences="20">
