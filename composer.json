@@ -31,7 +31,7 @@
     "require": {
         "php": "~8.0.0 || ~8.1.0 || ~8.2.0",
         "laminas/laminas-diactoros": "^2.0",
-        "laminas/laminas-http": "^2.15",
+        "laminas/laminas-http": "^2.18",
         "psr/http-message": "^1.0"
     },
     "require-dev": {
