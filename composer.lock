@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c7752b8b31da25ad454a277b1a6ac5da",
+    "content-hash": "f6339666237fdf445620110318f91e34",
     "packages": [
         {
             "name": "laminas/laminas-diactoros",
