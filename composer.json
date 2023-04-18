@@ -40,10 +40,6 @@
         "psalm/plugin-phpunit": "^0.18.4",
         "vimeo/psalm": "^5.4"
     },
-    "conflict": {
-        "laminas/laminas-stdlib": "< 3.2.1",
-        "zendframework/zend-psr7bridge": "*"
-    },
     "autoload": {
         "psr-4": {
             "Laminas\\Psr7Bridge\\": "src/"
