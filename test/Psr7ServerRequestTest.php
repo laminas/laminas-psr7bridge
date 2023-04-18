@@ -402,7 +402,7 @@ class Psr7ServerRequestTest extends TestCase
      *     mixed[],
      * }>
      */
-    public function getResponseData(): array
+    public static function getResponseData(): array
     {
         return [
             [
