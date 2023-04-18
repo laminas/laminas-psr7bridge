@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="5.1.0@4defa177c89397c5e14737a80fe4896584130674">
+<files psalm-version="5.9.0@8b9ad1eb9e8b7d3101f949291da2b9f7767cd163">
   <file src="src/Laminas/Request.php">
-    <MixedArgument occurrences="1">
+    <MixedArgument>
       <code>$value</code>
     </MixedArgument>
-    <MixedArgumentTypeCoercion occurrences="1">
+    <MixedArgumentTypeCoercion>
       <code>$name</code>
     </MixedArgumentTypeCoercion>
-    <MixedAssignment occurrences="2">
+    <MixedAssignment>
       <code>$value</code>
       <code>$values</code>
     </MixedAssignment>
-    <PossiblyInvalidMethodCall occurrences="2">
+    <PossiblyInvalidMethodCall>
       <code>addHeader</code>
       <code>addHeaderLine</code>
     </PossiblyInvalidMethodCall>
-    <PossiblyUndefinedMethod occurrences="2">
+    <PossiblyUndefinedMethod>
       <code>addHeader</code>
       <code>addHeaderLine</code>
     </PossiblyUndefinedMethod>
-    <PropertyNotSetInConstructor occurrences="8">
+    <PropertyNotSetInConstructor>
       <code>Request</code>
       <code>Request</code>
       <code>Request</code>
@@ -31,41 +31,45 @@
     </PropertyNotSetInConstructor>
   </file>
   <file src="src/Psr7Response.php">
-    <MixedArgument occurrences="3">
+    <MixedArgument>
       <code>$uri</code>
       <code>func_get_args()</code>
       <code>func_get_args()</code>
     </MixedArgument>
-    <MixedAssignment occurrences="1">
+    <MixedAssignment>
       <code>$uri</code>
     </MixedAssignment>
-    <PossiblyInvalidArgument occurrences="1">
+    <PossiblyInvalidArgument>
       <code>$uri</code>
     </PossiblyInvalidArgument>
-    <PossiblyInvalidCast occurrences="1">
+    <PossiblyInvalidCast>
       <code>$uri</code>
     </PossiblyInvalidCast>
+    <PossiblyUnusedMethod>
+      <code>fromZend</code>
+      <code>toZend</code>
+    </PossiblyUnusedMethod>
   </file>
   <file src="src/Psr7ServerRequest.php">
-    <DocblockTypeContradiction occurrences="1">
+    <DocblockTypeContradiction>
       <code>is_array($upload)</code>
     </DocblockTypeContradiction>
-    <InvalidReturnStatement occurrences="1">
+    <InvalidReturnStatement>
       <code>$uploadedFiles</code>
     </InvalidReturnStatement>
-    <InvalidReturnType occurrences="1">
+    <InvalidReturnType>
       <code>UploadedFile[]|UploadedFile</code>
     </InvalidReturnType>
-    <MixedArgument occurrences="15">
+    <MixedArgument>
       <code>$files</code>
-      <code>$files['error']</code>
-      <code>$files['name']</code>
-      <code>$files['size']</code>
-      <code>$files['tmp_name']</code>
-      <code>$files['type']</code>
+      <code><![CDATA[$files['error']]]></code>
+      <code><![CDATA[$files['name']]]></code>
+      <code><![CDATA[$files['size']]]></code>
+      <code><![CDATA[$files['tmp_name']]]></code>
+      <code><![CDATA[$files['type']]]></code>
       <code>$headers</code>
-      <code>$laminasRequest-&gt;getContent()</code>
-      <code>$laminasRequest-&gt;getServer()</code>
+      <code><![CDATA[$laminasRequest->getContent()]]></code>
+      <code><![CDATA[$laminasRequest->getServer()]]></code>
       <code>$post</code>
       <code>$query</code>
       <code>$upload</code>
@@ -73,47 +77,51 @@
       <code>func_get_args()</code>
       <code>func_get_args()</code>
     </MixedArgument>
-    <MixedArgumentTypeCoercion occurrences="1">
-      <code>$psr7Request-&gt;getUploadedFiles()</code>
+    <MixedArgumentTypeCoercion>
+      <code><![CDATA[$psr7Request->getUploadedFiles()]]></code>
     </MixedArgumentTypeCoercion>
-    <MixedAssignment occurrences="5">
+    <MixedAssignment>
       <code>$files</code>
       <code>$headers</code>
       <code>$post</code>
       <code>$query</code>
       <code>$value</code>
     </MixedAssignment>
-    <MixedMethodCall occurrences="3">
+    <MixedMethodCall>
       <code>toArray</code>
       <code>toArray</code>
       <code>toArray</code>
     </MixedMethodCall>
-    <PossiblyInvalidArgument occurrences="2">
-      <code>$psr7Request-&gt;getParsedBody() ?: []</code>
+    <PossiblyInvalidArgument>
+      <code><![CDATA[$psr7Request->getParsedBody() ?: []]]></code>
       <code>self::convertFilesToUploaded($files)</code>
     </PossiblyInvalidArgument>
-    <PossiblyInvalidMethodCall occurrences="2">
+    <PossiblyInvalidMethodCall>
       <code>getArrayCopy</code>
       <code>toArray</code>
     </PossiblyInvalidMethodCall>
-    <PossiblyUndefinedMethod occurrences="1">
+    <PossiblyUndefinedMethod>
       <code>toArray</code>
     </PossiblyUndefinedMethod>
+    <PossiblyUnusedMethod>
+      <code>fromZend</code>
+      <code>toZend</code>
+    </PossiblyUnusedMethod>
   </file>
   <file src="test/Laminas/RequestTest.php">
-    <MissingReturnType occurrences="1">
+    <MissingReturnType>
       <code>testConstructor</code>
     </MissingReturnType>
   </file>
   <file src="test/Psr7ResponseTest.php">
-    <InaccessibleMethod occurrences="1">
+    <InaccessibleMethod>
       <code>new Psr7Response()</code>
     </InaccessibleMethod>
-    <MissingReturnType occurrences="2">
+    <MissingReturnType>
       <code>testConvertedHeadersAreInstanceOfTheirAppropriateClasses</code>
       <code>testPrivateConstruct</code>
     </MissingReturnType>
-    <MixedArgument occurrences="7">
+    <MixedArgument>
       <code>$laminasHeaders[$type]</code>
       <code>$laminasHeaders[$type]</code>
       <code>$laminasHeaders[$type]</code>
@@ -122,7 +130,7 @@
       <code>$value</code>
       <code>$value</code>
     </MixedArgument>
-    <MixedAssignment occurrences="6">
+    <MixedAssignment>
       <code>$value</code>
       <code>$value</code>
       <code>$value</code>
@@ -130,24 +138,24 @@
       <code>$values</code>
       <code>$values</code>
     </MixedAssignment>
-    <PossiblyUndefinedMethod occurrences="1">
+    <PossiblyUndefinedMethod>
       <code>$cookies</code>
     </PossiblyUndefinedMethod>
   </file>
   <file src="test/Psr7ServerRequestTest.php">
-    <InaccessibleMethod occurrences="1">
+    <InaccessibleMethod>
       <code>new Psr7ServerRequest()</code>
     </InaccessibleMethod>
-    <MissingReturnType occurrences="5">
+    <MissingReturnType>
       <code>testBaseUrlFromGlobal</code>
       <code>testFromLaminasCanHandleNullContent</code>
       <code>testFromLaminasConvertsCookies</code>
       <code>testPrivateConstruct</code>
       <code>testServerParams</code>
     </MissingReturnType>
-    <MixedArgument occurrences="31">
-      <code>$laminasRequest-&gt;getFiles()</code>
-      <code>$laminasRequest-&gt;getPost()</code>
+    <MixedArgument>
+      <code><![CDATA[$laminasRequest->getFiles()]]></code>
+      <code><![CDATA[$laminasRequest->getPost()]]></code>
       <code>$laminas[$name]</code>
       <code>$psr7[$name]</code>
       <code>$test</code>
@@ -178,24 +186,24 @@
       <code>$upload[1]</code>
       <code>$upload[1]</code>
     </MixedArgument>
-    <MixedArrayAccess occurrences="15">
-      <code>$upload['error']</code>
-      <code>$upload['name']</code>
-      <code>$upload['size']</code>
-      <code>$upload['tmp_name']</code>
-      <code>$upload['type']</code>
-      <code>$upload[0]['error']</code>
-      <code>$upload[0]['name']</code>
-      <code>$upload[0]['size']</code>
-      <code>$upload[0]['tmp_name']</code>
-      <code>$upload[0]['type']</code>
-      <code>$upload[1]['error']</code>
-      <code>$upload[1]['name']</code>
-      <code>$upload[1]['size']</code>
-      <code>$upload[1]['tmp_name']</code>
-      <code>$upload[1]['type']</code>
+    <MixedArrayAccess>
+      <code><![CDATA[$upload['error']]]></code>
+      <code><![CDATA[$upload['name']]]></code>
+      <code><![CDATA[$upload['size']]]></code>
+      <code><![CDATA[$upload['tmp_name']]]></code>
+      <code><![CDATA[$upload['type']]]></code>
+      <code><![CDATA[$upload[0]['error']]]></code>
+      <code><![CDATA[$upload[0]['name']]]></code>
+      <code><![CDATA[$upload[0]['size']]]></code>
+      <code><![CDATA[$upload[0]['tmp_name']]]></code>
+      <code><![CDATA[$upload[0]['type']]]></code>
+      <code><![CDATA[$upload[1]['error']]]></code>
+      <code><![CDATA[$upload[1]['name']]]></code>
+      <code><![CDATA[$upload[1]['size']]]></code>
+      <code><![CDATA[$upload[1]['tmp_name']]]></code>
+      <code><![CDATA[$upload[1]['type']]]></code>
     </MixedArrayAccess>
-    <MixedAssignment occurrences="6">
+    <MixedAssignment>
       <code>$test</code>
       <code>$test</code>
       <code>$test</code>
@@ -203,7 +211,7 @@
       <code>$upload</code>
       <code>$value</code>
     </MixedAssignment>
-    <MixedMethodCall occurrences="20">
+    <MixedMethodCall>
       <code>fromArray</code>
       <code>fromArray</code>
       <code>fromArray</code>
@@ -225,7 +233,7 @@
       <code>getFieldValue</code>
       <code>getFieldValue</code>
     </MixedMethodCall>
-    <PossiblyInvalidMethodCall occurrences="34">
+    <PossiblyInvalidMethodCall>
       <code>addHeader</code>
       <code>addHeaders</code>
       <code>get</code>
@@ -261,7 +269,7 @@
       <code>has</code>
       <code>has</code>
     </PossiblyInvalidMethodCall>
-    <PossiblyUndefinedMethod occurrences="28">
+    <PossiblyUndefinedMethod>
       <code>addHeader</code>
       <code>addHeaders</code>
       <code>get</code>
@@ -291,11 +299,11 @@
       <code>has</code>
       <code>has</code>
     </PossiblyUndefinedMethod>
-    <RedundantCastGivenDocblockType occurrences="2">
-      <code>(string) $laminasRequest-&gt;getContent()</code>
-      <code>(string) $laminasRequest-&gt;getContent()</code>
+    <RedundantCastGivenDocblockType>
+      <code><![CDATA[(string) $laminasRequest->getContent()]]></code>
+      <code><![CDATA[(string) $laminasRequest->getContent()]]></code>
     </RedundantCastGivenDocblockType>
-    <UndefinedInterfaceMethod occurrences="4">
+    <UndefinedInterfaceMethod>
       <code>$psr7</code>
       <code>get</code>
       <code>get</code>
