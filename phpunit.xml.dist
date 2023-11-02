@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit//phpunit.xsd"
+        xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
         backupGlobals="true"
         bootstrap="vendor/autoload.php"
-        convertDeprecationsToExceptions="true"
-        colors="true">
-  <coverage processUncoveredFiles="true">
-    <include>
-      <directory suffix=".php">./src</directory>
-    </include>
-  </coverage>
-
+        colors="true"
+        cacheDirectory=".phpunit.cache">
+  <coverage/>
   <testsuites>
     <testsuite name="Laminas\\Psr7Bridge Tests">
       <directory>./test</directory>
     </testsuite>
   </testsuites>
+  <source>
+    <include>
+      <directory suffix=".php">./src</directory>
+    </include>
+  </source>
 </phpunit>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="5.9.0@8b9ad1eb9e8b7d3101f949291da2b9f7767cd163">
+<files psalm-version="5.15.0@5c774aca4746caf3d239d9c8cadb9f882ca29352">
   <file src="src/Laminas/Request.php">
     <MixedArgument>
       <code>$value</code>
@@ -167,14 +167,6 @@
       <code>$upload</code>
       <code>$upload</code>
       <code>$upload</code>
-      <code>$upload</code>
-      <code>$upload</code>
-      <code>$upload</code>
-      <code>$upload</code>
-      <code>$upload</code>
-      <code>$upload</code>
-      <code>$upload</code>
-      <code>$upload</code>
       <code>$upload[0]</code>
       <code>$upload[0]</code>
       <code>$upload[0]</code>
@@ -187,11 +179,6 @@
       <code>$upload[1]</code>
     </MixedArgument>
     <MixedArrayAccess>
-      <code><![CDATA[$upload['error']]]></code>
-      <code><![CDATA[$upload['name']]]></code>
-      <code><![CDATA[$upload['size']]]></code>
-      <code><![CDATA[$upload['tmp_name']]]></code>
-      <code><![CDATA[$upload['type']]]></code>
       <code><![CDATA[$upload[0]['error']]]></code>
       <code><![CDATA[$upload[0]['name']]]></code>
       <code><![CDATA[$upload[0]['size']]]></code>
@@ -207,6 +194,9 @@
       <code>$test</code>
       <code>$test</code>
       <code>$test</code>
+      <code>$test</code>
+      <code>$test</code>
+      <code>$test</code>
       <code>$upload</code>
       <code>$upload</code>
       <code>$value</code>
@@ -215,9 +205,6 @@
       <code>fromArray</code>
       <code>fromArray</code>
       <code>fromArray</code>
-      <code>get</code>
-      <code>get</code>
-      <code>get</code>
       <code>get</code>
       <code>get</code>
       <code>get</code>
@@ -236,6 +223,9 @@
     <PossiblyInvalidMethodCall>
       <code>addHeader</code>
       <code>addHeaders</code>
+      <code>get</code>
+      <code>get</code>
+      <code>get</code>
       <code>get</code>
       <code>get</code>
       <code>get</code>
@@ -305,6 +295,13 @@
     </RedundantCastGivenDocblockType>
     <UndefinedInterfaceMethod>
       <code>$psr7</code>
+      <code>$test</code>
+      <code>$test</code>
+      <code>$test</code>
+      <code>$upload</code>
+      <code>get</code>
+      <code>get</code>
+      <code>get</code>
       <code>get</code>
       <code>get</code>
       <code>get</code>

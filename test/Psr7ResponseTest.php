@@ -22,7 +22,7 @@ use function tmpfile;
 class Psr7ResponseTest extends TestCase
 {
     /** @return non-empty-list<array{string, positive-int, array<string, list<string>>}> */
-    public function getResponseData(): array
+    public static function getResponseData(): array
     {
         return [
             ['Test!', 200, ['Content-Type' => ['text/html']]],
@@ -119,7 +119,7 @@ class Psr7ResponseTest extends TestCase
     }
 
     /** @return non-empty-list<array{non-empty-string}> */
-    public function getResponseString(): array
+    public static function getResponseString(): array
     {
         return [
             ["HTTP/1.1 200 OK\r\nContent-Type: text/html; charset=utf-8\r\n\r\nTest!"],
