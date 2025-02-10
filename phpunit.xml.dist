@@ -5,7 +5,17 @@
         backupGlobals="true"
         bootstrap="vendor/autoload.php"
         colors="true"
-        cacheDirectory=".phpunit.cache">
+        cacheDirectory=".phpunit.cache"
+        displayDetailsOnIncompleteTests="true"
+        displayDetailsOnSkippedTests="true"
+        displayDetailsOnTestsThatTriggerDeprecations="true"
+        displayDetailsOnTestsThatTriggerErrors="true"
+        displayDetailsOnTestsThatTriggerNotices="true"
+        displayDetailsOnTestsThatTriggerWarnings="true"
+        failOnDeprecation="true"
+        failOnWarning="true"
+        failOnNotice="true"
+>
   <coverage/>
   <testsuites>
     <testsuite name="Laminas\\Psr7Bridge Tests">
