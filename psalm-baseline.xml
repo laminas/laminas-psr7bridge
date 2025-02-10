@@ -1,182 +1,190 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="5.15.0@5c774aca4746caf3d239d9c8cadb9f882ca29352">
+<files psalm-version="5.26.1@d747f6500b38ac4f7dfc5edbcae6e4b637d7add0">
   <file src="src/Laminas/Request.php">
     <MixedArgument>
-      <code>$value</code>
+      <code><![CDATA[$value]]></code>
     </MixedArgument>
     <MixedArgumentTypeCoercion>
-      <code>$name</code>
+      <code><![CDATA[$name]]></code>
     </MixedArgumentTypeCoercion>
     <MixedAssignment>
-      <code>$value</code>
-      <code>$values</code>
+      <code><![CDATA[$value]]></code>
+      <code><![CDATA[$values]]></code>
     </MixedAssignment>
     <PossiblyInvalidMethodCall>
-      <code>addHeader</code>
-      <code>addHeaderLine</code>
+      <code><![CDATA[addHeader]]></code>
+      <code><![CDATA[addHeaderLine]]></code>
     </PossiblyInvalidMethodCall>
     <PossiblyUndefinedMethod>
-      <code>addHeader</code>
-      <code>addHeaderLine</code>
+      <code><![CDATA[addHeader]]></code>
+      <code><![CDATA[addHeaderLine]]></code>
     </PossiblyUndefinedMethod>
     <PropertyNotSetInConstructor>
-      <code>Request</code>
-      <code>Request</code>
-      <code>Request</code>
-      <code>Request</code>
-      <code>Request</code>
-      <code>Request</code>
-      <code>Request</code>
-      <code>Request</code>
+      <code><![CDATA[Request]]></code>
+      <code><![CDATA[Request]]></code>
+      <code><![CDATA[Request]]></code>
+      <code><![CDATA[Request]]></code>
+      <code><![CDATA[Request]]></code>
+      <code><![CDATA[Request]]></code>
+      <code><![CDATA[Request]]></code>
+      <code><![CDATA[Request]]></code>
     </PropertyNotSetInConstructor>
   </file>
   <file src="src/Psr7Response.php">
     <MixedArgument>
-      <code>$uri</code>
-      <code>func_get_args()</code>
-      <code>func_get_args()</code>
+      <code><![CDATA[$uri]]></code>
+      <code><![CDATA[func_get_args()]]></code>
+      <code><![CDATA[func_get_args()]]></code>
     </MixedArgument>
     <MixedAssignment>
-      <code>$uri</code>
+      <code><![CDATA[$uri]]></code>
     </MixedAssignment>
     <PossiblyInvalidArgument>
-      <code>$uri</code>
+      <code><![CDATA[$uri]]></code>
     </PossiblyInvalidArgument>
     <PossiblyInvalidCast>
-      <code>$uri</code>
+      <code><![CDATA[$uri]]></code>
     </PossiblyInvalidCast>
     <PossiblyUnusedMethod>
-      <code>fromZend</code>
-      <code>toZend</code>
+      <code><![CDATA[fromZend]]></code>
+      <code><![CDATA[toZend]]></code>
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Psr7ServerRequest.php">
     <DocblockTypeContradiction>
-      <code>is_array($upload)</code>
+      <code><![CDATA[is_array($upload)]]></code>
     </DocblockTypeContradiction>
     <InvalidReturnStatement>
-      <code>$uploadedFiles</code>
+      <code><![CDATA[$uploadedFiles]]></code>
     </InvalidReturnStatement>
     <InvalidReturnType>
-      <code>UploadedFile[]|UploadedFile</code>
+      <code><![CDATA[UploadedFile[]|UploadedFile]]></code>
     </InvalidReturnType>
     <MixedArgument>
-      <code>$files</code>
+      <code><![CDATA[$files]]></code>
       <code><![CDATA[$files['error']]]></code>
       <code><![CDATA[$files['name']]]></code>
       <code><![CDATA[$files['size']]]></code>
       <code><![CDATA[$files['tmp_name']]]></code>
       <code><![CDATA[$files['type']]]></code>
-      <code>$headers</code>
+      <code><![CDATA[$headers]]></code>
       <code><![CDATA[$laminasRequest->getContent()]]></code>
       <code><![CDATA[$laminasRequest->getServer()]]></code>
-      <code>$post</code>
-      <code>$query</code>
-      <code>$upload</code>
-      <code>func_get_args()</code>
-      <code>func_get_args()</code>
-      <code>func_get_args()</code>
+      <code><![CDATA[$post]]></code>
+      <code><![CDATA[$query]]></code>
+      <code><![CDATA[func_get_args()]]></code>
+      <code><![CDATA[func_get_args()]]></code>
+      <code><![CDATA[func_get_args()]]></code>
     </MixedArgument>
     <MixedArgumentTypeCoercion>
       <code><![CDATA[$psr7Request->getUploadedFiles()]]></code>
     </MixedArgumentTypeCoercion>
     <MixedAssignment>
-      <code>$files</code>
-      <code>$headers</code>
-      <code>$post</code>
-      <code>$query</code>
-      <code>$value</code>
+      <code><![CDATA[$files]]></code>
+      <code><![CDATA[$headers]]></code>
+      <code><![CDATA[$post]]></code>
+      <code><![CDATA[$query]]></code>
+      <code><![CDATA[$value]]></code>
     </MixedAssignment>
     <MixedMethodCall>
-      <code>toArray</code>
-      <code>toArray</code>
-      <code>toArray</code>
+      <code><![CDATA[toArray]]></code>
+      <code><![CDATA[toArray]]></code>
+      <code><![CDATA[toArray]]></code>
     </MixedMethodCall>
+    <NoValue>
+      <code><![CDATA[$upload]]></code>
+    </NoValue>
     <PossiblyInvalidArgument>
       <code><![CDATA[$psr7Request->getParsedBody() ?: []]]></code>
-      <code>self::convertFilesToUploaded($files)</code>
+      <code><![CDATA[self::convertFilesToUploaded($files)]]></code>
     </PossiblyInvalidArgument>
     <PossiblyInvalidMethodCall>
-      <code>getArrayCopy</code>
-      <code>toArray</code>
+      <code><![CDATA[getArrayCopy]]></code>
+      <code><![CDATA[toArray]]></code>
     </PossiblyInvalidMethodCall>
     <PossiblyUndefinedMethod>
-      <code>toArray</code>
+      <code><![CDATA[toArray]]></code>
     </PossiblyUndefinedMethod>
     <PossiblyUnusedMethod>
-      <code>fromZend</code>
-      <code>toZend</code>
+      <code><![CDATA[fromZend]]></code>
+      <code><![CDATA[toZend]]></code>
     </PossiblyUnusedMethod>
+    <RiskyTruthyFalsyComparison>
+      <code><![CDATA[$psr7Request->getParsedBody()]]></code>
+      <code><![CDATA[empty($laminasRequest->getFiles())]]></code>
+      <code><![CDATA[empty($laminasRequest->getPost())]]></code>
+      <code><![CDATA[empty($laminasRequest->getQuery())]]></code>
+    </RiskyTruthyFalsyComparison>
   </file>
   <file src="test/Laminas/RequestTest.php">
     <MissingReturnType>
-      <code>testConstructor</code>
+      <code><![CDATA[testConstructor]]></code>
     </MissingReturnType>
   </file>
   <file src="test/Psr7ResponseTest.php">
     <InaccessibleMethod>
-      <code>new Psr7Response()</code>
+      <code><![CDATA[new Psr7Response()]]></code>
     </InaccessibleMethod>
     <MissingReturnType>
-      <code>testConvertedHeadersAreInstanceOfTheirAppropriateClasses</code>
-      <code>testPrivateConstruct</code>
+      <code><![CDATA[testConvertedHeadersAreInstanceOfTheirAppropriateClasses]]></code>
+      <code><![CDATA[testPrivateConstruct]]></code>
     </MissingReturnType>
     <MixedArgument>
-      <code>$laminasHeaders[$type]</code>
-      <code>$laminasHeaders[$type]</code>
-      <code>$laminasHeaders[$type]</code>
-      <code>$laminasHeaders[$type]</code>
-      <code>$value</code>
-      <code>$value</code>
-      <code>$value</code>
+      <code><![CDATA[$laminasHeaders[$type]]]></code>
+      <code><![CDATA[$laminasHeaders[$type]]]></code>
+      <code><![CDATA[$laminasHeaders[$type]]]></code>
+      <code><![CDATA[$laminasHeaders[$type]]]></code>
+      <code><![CDATA[$value]]></code>
+      <code><![CDATA[$value]]></code>
+      <code><![CDATA[$value]]></code>
     </MixedArgument>
     <MixedAssignment>
-      <code>$value</code>
-      <code>$value</code>
-      <code>$value</code>
-      <code>$values</code>
-      <code>$values</code>
-      <code>$values</code>
+      <code><![CDATA[$value]]></code>
+      <code><![CDATA[$value]]></code>
+      <code><![CDATA[$value]]></code>
+      <code><![CDATA[$values]]></code>
+      <code><![CDATA[$values]]></code>
+      <code><![CDATA[$values]]></code>
     </MixedAssignment>
     <PossiblyUndefinedMethod>
-      <code>$cookies</code>
+      <code><![CDATA[$cookies]]></code>
     </PossiblyUndefinedMethod>
   </file>
   <file src="test/Psr7ServerRequestTest.php">
     <InaccessibleMethod>
-      <code>new Psr7ServerRequest()</code>
+      <code><![CDATA[new Psr7ServerRequest()]]></code>
     </InaccessibleMethod>
     <MissingReturnType>
-      <code>testBaseUrlFromGlobal</code>
-      <code>testFromLaminasCanHandleNullContent</code>
-      <code>testFromLaminasConvertsCookies</code>
-      <code>testPrivateConstruct</code>
-      <code>testServerParams</code>
+      <code><![CDATA[testBaseUrlFromGlobal]]></code>
+      <code><![CDATA[testFromLaminasCanHandleNullContent]]></code>
+      <code><![CDATA[testFromLaminasConvertsCookies]]></code>
+      <code><![CDATA[testPrivateConstruct]]></code>
+      <code><![CDATA[testServerParams]]></code>
     </MissingReturnType>
     <MixedArgument>
       <code><![CDATA[$laminasRequest->getFiles()]]></code>
       <code><![CDATA[$laminasRequest->getPost()]]></code>
-      <code>$laminas[$name]</code>
-      <code>$psr7[$name]</code>
-      <code>$test</code>
-      <code>$test</code>
-      <code>$test</code>
-      <code>$test</code>
-      <code>$test</code>
-      <code>$test</code>
-      <code>$upload</code>
-      <code>$upload</code>
-      <code>$upload</code>
-      <code>$upload[0]</code>
-      <code>$upload[0]</code>
-      <code>$upload[0]</code>
-      <code>$upload[0]</code>
-      <code>$upload[0]</code>
-      <code>$upload[1]</code>
-      <code>$upload[1]</code>
-      <code>$upload[1]</code>
-      <code>$upload[1]</code>
-      <code>$upload[1]</code>
+      <code><![CDATA[$laminas[$name]]]></code>
+      <code><![CDATA[$psr7[$name]]]></code>
+      <code><![CDATA[$test]]></code>
+      <code><![CDATA[$test]]></code>
+      <code><![CDATA[$test]]></code>
+      <code><![CDATA[$test]]></code>
+      <code><![CDATA[$test]]></code>
+      <code><![CDATA[$test]]></code>
+      <code><![CDATA[$upload]]></code>
+      <code><![CDATA[$upload]]></code>
+      <code><![CDATA[$upload]]></code>
+      <code><![CDATA[$upload[0]]]></code>
+      <code><![CDATA[$upload[0]]]></code>
+      <code><![CDATA[$upload[0]]]></code>
+      <code><![CDATA[$upload[0]]]></code>
+      <code><![CDATA[$upload[0]]]></code>
+      <code><![CDATA[$upload[1]]]></code>
+      <code><![CDATA[$upload[1]]]></code>
+      <code><![CDATA[$upload[1]]]></code>
+      <code><![CDATA[$upload[1]]]></code>
+      <code><![CDATA[$upload[1]]]></code>
     </MixedArgument>
     <MixedArrayAccess>
       <code><![CDATA[$upload[0]['error']]]></code>
@@ -191,120 +199,120 @@
       <code><![CDATA[$upload[1]['type']]]></code>
     </MixedArrayAccess>
     <MixedAssignment>
-      <code>$test</code>
-      <code>$test</code>
-      <code>$test</code>
-      <code>$test</code>
-      <code>$test</code>
-      <code>$test</code>
-      <code>$upload</code>
-      <code>$upload</code>
-      <code>$value</code>
+      <code><![CDATA[$test]]></code>
+      <code><![CDATA[$test]]></code>
+      <code><![CDATA[$test]]></code>
+      <code><![CDATA[$test]]></code>
+      <code><![CDATA[$test]]></code>
+      <code><![CDATA[$test]]></code>
+      <code><![CDATA[$upload]]></code>
+      <code><![CDATA[$upload]]></code>
+      <code><![CDATA[$value]]></code>
     </MixedAssignment>
     <MixedMethodCall>
-      <code>fromArray</code>
-      <code>fromArray</code>
-      <code>fromArray</code>
-      <code>get</code>
-      <code>get</code>
-      <code>get</code>
-      <code>getArrayCopy</code>
-      <code>getArrayCopy</code>
-      <code>getFieldValue</code>
-      <code>getFieldValue</code>
-      <code>getFieldValue</code>
-      <code>getFieldValue</code>
-      <code>getFieldValue</code>
-      <code>getFieldValue</code>
-      <code>getFieldValue</code>
-      <code>getFieldValue</code>
-      <code>getFieldValue</code>
+      <code><![CDATA[fromArray]]></code>
+      <code><![CDATA[fromArray]]></code>
+      <code><![CDATA[fromArray]]></code>
+      <code><![CDATA[get]]></code>
+      <code><![CDATA[get]]></code>
+      <code><![CDATA[get]]></code>
+      <code><![CDATA[getArrayCopy]]></code>
+      <code><![CDATA[getArrayCopy]]></code>
+      <code><![CDATA[getFieldValue]]></code>
+      <code><![CDATA[getFieldValue]]></code>
+      <code><![CDATA[getFieldValue]]></code>
+      <code><![CDATA[getFieldValue]]></code>
+      <code><![CDATA[getFieldValue]]></code>
+      <code><![CDATA[getFieldValue]]></code>
+      <code><![CDATA[getFieldValue]]></code>
+      <code><![CDATA[getFieldValue]]></code>
+      <code><![CDATA[getFieldValue]]></code>
     </MixedMethodCall>
     <PossiblyInvalidMethodCall>
-      <code>addHeader</code>
-      <code>addHeaders</code>
-      <code>get</code>
-      <code>get</code>
-      <code>get</code>
-      <code>get</code>
-      <code>get</code>
-      <code>get</code>
-      <code>get</code>
-      <code>get</code>
-      <code>get</code>
-      <code>get</code>
-      <code>get</code>
-      <code>get</code>
-      <code>get</code>
-      <code>get</code>
-      <code>get</code>
-      <code>get</code>
-      <code>get</code>
-      <code>get</code>
-      <code>getClientFilename</code>
-      <code>getClientMediaType</code>
-      <code>getError</code>
-      <code>getSize</code>
-      <code>getStream</code>
-      <code>has</code>
-      <code>has</code>
-      <code>has</code>
-      <code>has</code>
-      <code>has</code>
-      <code>has</code>
-      <code>has</code>
-      <code>has</code>
-      <code>has</code>
-      <code>has</code>
-      <code>has</code>
-      <code>has</code>
+      <code><![CDATA[addHeader]]></code>
+      <code><![CDATA[addHeaders]]></code>
+      <code><![CDATA[get]]></code>
+      <code><![CDATA[get]]></code>
+      <code><![CDATA[get]]></code>
+      <code><![CDATA[get]]></code>
+      <code><![CDATA[get]]></code>
+      <code><![CDATA[get]]></code>
+      <code><![CDATA[get]]></code>
+      <code><![CDATA[get]]></code>
+      <code><![CDATA[get]]></code>
+      <code><![CDATA[get]]></code>
+      <code><![CDATA[get]]></code>
+      <code><![CDATA[get]]></code>
+      <code><![CDATA[get]]></code>
+      <code><![CDATA[get]]></code>
+      <code><![CDATA[get]]></code>
+      <code><![CDATA[get]]></code>
+      <code><![CDATA[get]]></code>
+      <code><![CDATA[get]]></code>
+      <code><![CDATA[getClientFilename]]></code>
+      <code><![CDATA[getClientMediaType]]></code>
+      <code><![CDATA[getError]]></code>
+      <code><![CDATA[getSize]]></code>
+      <code><![CDATA[getStream]]></code>
+      <code><![CDATA[has]]></code>
+      <code><![CDATA[has]]></code>
+      <code><![CDATA[has]]></code>
+      <code><![CDATA[has]]></code>
+      <code><![CDATA[has]]></code>
+      <code><![CDATA[has]]></code>
+      <code><![CDATA[has]]></code>
+      <code><![CDATA[has]]></code>
+      <code><![CDATA[has]]></code>
+      <code><![CDATA[has]]></code>
+      <code><![CDATA[has]]></code>
+      <code><![CDATA[has]]></code>
     </PossiblyInvalidMethodCall>
     <PossiblyUndefinedMethod>
-      <code>addHeader</code>
-      <code>addHeaders</code>
-      <code>get</code>
-      <code>get</code>
-      <code>get</code>
-      <code>get</code>
-      <code>get</code>
-      <code>get</code>
-      <code>get</code>
-      <code>get</code>
-      <code>get</code>
-      <code>get</code>
-      <code>get</code>
-      <code>get</code>
-      <code>getArrayCopy</code>
-      <code>getArrayCopy</code>
-      <code>has</code>
-      <code>has</code>
-      <code>has</code>
-      <code>has</code>
-      <code>has</code>
-      <code>has</code>
-      <code>has</code>
-      <code>has</code>
-      <code>has</code>
-      <code>has</code>
-      <code>has</code>
-      <code>has</code>
+      <code><![CDATA[addHeader]]></code>
+      <code><![CDATA[addHeaders]]></code>
+      <code><![CDATA[get]]></code>
+      <code><![CDATA[get]]></code>
+      <code><![CDATA[get]]></code>
+      <code><![CDATA[get]]></code>
+      <code><![CDATA[get]]></code>
+      <code><![CDATA[get]]></code>
+      <code><![CDATA[get]]></code>
+      <code><![CDATA[get]]></code>
+      <code><![CDATA[get]]></code>
+      <code><![CDATA[get]]></code>
+      <code><![CDATA[get]]></code>
+      <code><![CDATA[get]]></code>
+      <code><![CDATA[getArrayCopy]]></code>
+      <code><![CDATA[getArrayCopy]]></code>
+      <code><![CDATA[has]]></code>
+      <code><![CDATA[has]]></code>
+      <code><![CDATA[has]]></code>
+      <code><![CDATA[has]]></code>
+      <code><![CDATA[has]]></code>
+      <code><![CDATA[has]]></code>
+      <code><![CDATA[has]]></code>
+      <code><![CDATA[has]]></code>
+      <code><![CDATA[has]]></code>
+      <code><![CDATA[has]]></code>
+      <code><![CDATA[has]]></code>
+      <code><![CDATA[has]]></code>
     </PossiblyUndefinedMethod>
     <RedundantCastGivenDocblockType>
       <code><![CDATA[(string) $laminasRequest->getContent()]]></code>
       <code><![CDATA[(string) $laminasRequest->getContent()]]></code>
     </RedundantCastGivenDocblockType>
     <UndefinedInterfaceMethod>
-      <code>$psr7</code>
-      <code>$test</code>
-      <code>$test</code>
-      <code>$test</code>
-      <code>$upload</code>
-      <code>get</code>
-      <code>get</code>
-      <code>get</code>
-      <code>get</code>
-      <code>get</code>
-      <code>get</code>
+      <code><![CDATA[$psr7]]></code>
+      <code><![CDATA[$test]]></code>
+      <code><![CDATA[$test]]></code>
+      <code><![CDATA[$test]]></code>
+      <code><![CDATA[$upload]]></code>
+      <code><![CDATA[get]]></code>
+      <code><![CDATA[get]]></code>
+      <code><![CDATA[get]]></code>
+      <code><![CDATA[get]]></code>
+      <code><![CDATA[get]]></code>
+      <code><![CDATA[get]]></code>
     </UndefinedInterfaceMethod>
   </file>
 </files>
