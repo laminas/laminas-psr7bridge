@@ -583,16 +583,16 @@
         },
         {
             "name": "laminas/laminas-validator",
-            "version": "3.0.1",
+            "version": "3.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laminas/laminas-validator.git",
-                "reference": "ab6f4564360edba978d6b5082dc99cea2bd9bdef"
+                "reference": "571e6245c72b832001ed3c122498060f6dfa9708"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laminas/laminas-validator/zipball/ab6f4564360edba978d6b5082dc99cea2bd9bdef",
-                "reference": "ab6f4564360edba978d6b5082dc99cea2bd9bdef",
+                "url": "https://api.github.com/repos/laminas/laminas-validator/zipball/571e6245c72b832001ed3c122498060f6dfa9708",
+                "reference": "571e6245c72b832001ed3c122498060f6dfa9708",
                 "shasum": ""
             },
             "require": {
@@ -612,10 +612,9 @@
             "require-dev": {
                 "laminas/laminas-coding-standard": "^3.0.1",
                 "laminas/laminas-diactoros": "^3.5.0",
-                "maglnet/composer-require-checker": "^4.7.1",
-                "phpunit/phpunit": "^10.5.37",
-                "psalm/plugin-phpunit": "^0.19.0",
-                "vimeo/psalm": "^5.26.1"
+                "phpunit/phpunit": "^10.5.45",
+                "psalm/plugin-phpunit": "^0.19.2",
+                "vimeo/psalm": "^6.8.8"
             },
             "suggest": {
                 "laminas/laminas-i18n": "Laminas\\I18n component to allow translation of validation error messages",
@@ -657,7 +656,7 @@
                     "type": "community_bridge"
                 }
             ],
-            "time": "2024-11-29T09:36:29+00:00"
+            "time": "2025-03-03T14:28:42+00:00"
         },
         {
             "name": "nikic/php-parser",
