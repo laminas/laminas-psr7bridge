@@ -583,16 +583,16 @@
         },
         {
             "name": "laminas/laminas-validator",
-            "version": "3.1.0",
+            "version": "3.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laminas/laminas-validator.git",
-                "reference": "571e6245c72b832001ed3c122498060f6dfa9708"
+                "reference": "734d564aea1b71a28d8142620957c40e272435b7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laminas/laminas-validator/zipball/571e6245c72b832001ed3c122498060f6dfa9708",
-                "reference": "571e6245c72b832001ed3c122498060f6dfa9708",
+                "url": "https://api.github.com/repos/laminas/laminas-validator/zipball/734d564aea1b71a28d8142620957c40e272435b7",
+                "reference": "734d564aea1b71a28d8142620957c40e272435b7",
                 "shasum": ""
             },
             "require": {
@@ -656,7 +656,7 @@
                     "type": "community_bridge"
                 }
             ],
-            "time": "2025-03-03T14:28:42+00:00"
+            "time": "2025-04-13T13:09:24+00:00"
         },
         {
             "name": "nikic/php-parser",
@@ -3735,16 +3735,16 @@
         },
         {
             "name": "squizlabs/php_codesniffer",
-            "version": "3.12.1",
+            "version": "3.12.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPCSStandards/PHP_CodeSniffer.git",
-                "reference": "ea16a1f3719783345febd3aab41beb55c8c84bfd"
+                "reference": "6d4cf6032d4b718f168c90a96e36c7d0eaacb2aa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPCSStandards/PHP_CodeSniffer/zipball/ea16a1f3719783345febd3aab41beb55c8c84bfd",
-                "reference": "ea16a1f3719783345febd3aab41beb55c8c84bfd",
+                "url": "https://api.github.com/repos/PHPCSStandards/PHP_CodeSniffer/zipball/6d4cf6032d4b718f168c90a96e36c7d0eaacb2aa",
+                "reference": "6d4cf6032d4b718f168c90a96e36c7d0eaacb2aa",
                 "shasum": ""
             },
             "require": {
@@ -3815,7 +3815,7 @@
                     "type": "thanks_dev"
                 }
             ],
-            "time": "2025-04-04T12:57:55+00:00"
+            "time": "2025-04-13T04:10:18+00:00"
         },
         {
             "name": "symfony/console",
