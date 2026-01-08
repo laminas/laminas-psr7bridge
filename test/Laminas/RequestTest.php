@@ -8,7 +8,7 @@ use Laminas\Psr7Bridge\Laminas\Request;
 use Laminas\Uri\Http as Uri;
 use PHPUnit\Framework\TestCase;
 
-class RequestTest extends TestCase
+final class RequestTest extends TestCase
 {
     public function testConstructor()
     {

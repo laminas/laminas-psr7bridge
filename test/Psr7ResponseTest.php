@@ -19,9 +19,15 @@ use function sys_get_temp_dir;
 use function tempnam;
 use function tmpfile;
 
-class Psr7ResponseTest extends TestCase
+final class Psr7ResponseTest extends TestCase
 {
-    /** @return non-empty-list<array{string, positive-int, array<string, list<string>>}> */
+    /**
+     * @return non-empty-list<array{
+     *     string,
+     *     positive-int,
+     *     array<non-empty-string, array<array-key, string>|string>
+     * }>
+     */
     public static function getResponseData(): array
     {
         return [
@@ -48,7 +54,8 @@ class Psr7ResponseTest extends TestCase
 
     /**
      * @dataProvider getResponseData
-     */
+     * @psalm-param array<non-empty-string, array<array-key, string>|string> $headers
+    */
     public function testResponseToLaminas(string $body, int $status, array $headers): void
     {
         $stream = new Stream('php://temp', 'wb+');
@@ -64,7 +71,7 @@ class Psr7ResponseTest extends TestCase
 
         $laminasHeaders = $laminasResponse->getHeaders()->toArray();
         foreach ($headers as $type => $values) {
-            foreach ($values as $value) {
+            foreach ((array) $values as $value) {
                 $this->assertStringContainsString($value, $laminasHeaders[$type]);
             }
         }
@@ -72,12 +79,15 @@ class Psr7ResponseTest extends TestCase
 
     /**
      * @dataProvider getResponseData
+     * @psalm-param array<non-empty-string, array<array-key, string>|string> $headers
      */
     public function testResponseToLaminasWithMemoryStream(string $body, int $status, array $headers): void
     {
         $stream = new Stream('php://memory', 'wb+');
         $stream->write($body);
-
+        /**
+         * @psalm-param array<non-empty-string, array<array-key, string>|string> $headers
+         */
         $psr7Response = new Response($stream, $status, $headers);
         $this->assertInstanceOf(ResponseInterface::class, $psr7Response);
 
@@ -88,7 +98,7 @@ class Psr7ResponseTest extends TestCase
 
         $laminasHeaders = $laminasResponse->getHeaders()->toArray();
         foreach ($headers as $type => $values) {
-            foreach ($values as $value) {
+            foreach ((array) $values as $value) {
                 $this->assertStringContainsString($value, $laminasHeaders[$type]);
             }
         }
@@ -96,10 +106,13 @@ class Psr7ResponseTest extends TestCase
 
     /**
      * @dataProvider getResponseData
+     * @psalm-param array<non-empty-string, array<array-key, string>|string> $headers
      */
     public function testResponseToLaminasFromRealStream(string $body, int $status, array $headers): void
     {
-        $stream = new Stream(tempnam(sys_get_temp_dir(), 'Test'), 'wb+');
+        $tmpFile = tempnam(sys_get_temp_dir(), 'Test');
+        assert($tmpFile !== false);
+        $stream = new Stream($tmpFile, 'wb+');
         $stream->write($body);
 
         $psr7Response = new Response($stream, $status, $headers);
@@ -112,7 +125,7 @@ class Psr7ResponseTest extends TestCase
 
         $laminasHeaders = $laminasResponse->getHeaders()->toArray();
         foreach ($headers as $type => $values) {
-            foreach ($values as $value) {
+            foreach ((array) $values as $value) {
                 $this->assertStringContainsString($value, $laminasHeaders[$type]);
             }
         }
@@ -161,7 +174,9 @@ class Psr7ResponseTest extends TestCase
 
     public function testConvertedHeadersAreInstanceOfTheirAppropriateClasses()
     {
-        $psr7Response    = (new Response(tmpfile()))->withAddedHeader('Set-Cookie', 'foo=bar;domain=.laminas.dev');
+        $tmpfile = tmpfile();
+        assert($tmpfile !== false);
+        $psr7Response    = (new Response($tmpfile))->withAddedHeader('Set-Cookie', 'foo=bar;domain=.laminas.dev');
         $laminasResponse = Psr7Response::toLaminas($psr7Response);
 
         $cookies = $laminasResponse->getHeaders()->get('Set-Cookie');

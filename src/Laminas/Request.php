@@ -8,7 +8,9 @@ use Laminas\Stdlib\Parameters;
 use Psr\Http\Message\UriInterface;
 
 use function preg_replace;
-
+/**
+ * @final
+ */
 class Request extends BaseRequest
 {
     /**
@@ -38,7 +40,8 @@ class Request extends BaseRequest
 
         $this->setMethod($method);
         // Remove the "http(s)://hostname" part from the URI
-        $this->setRequestUri(preg_replace('#^[^/:]+://[^/]+#', '', (string) $uri));
+        $requestUri = preg_replace('#^[^/:]+://[^/]+#', '', (string) $uri);
+        $this->setRequestUri($requestUri ?? '');
         $this->setUri((string) $uri);
 
         $headerCollection = $this->getHeaders();

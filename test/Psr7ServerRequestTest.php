@@ -29,7 +29,7 @@ use function uniqid;
 use const UPLOAD_ERR_NO_FILE;
 use const UPLOAD_ERR_OK;
 
-class Psr7ServerRequestTest extends TestCase
+final class Psr7ServerRequestTest extends TestCase
 {
     public function testToLaminasWithShallowOmitsBody(): void
     {
@@ -53,7 +53,7 @@ class Psr7ServerRequestTest extends TestCase
         $method     = 'PATCH';
 
         $body = fopen(__FILE__, 'r');
-
+        assert($body !== false);
         $headers = [
             'Host'         => ['example.com'],
             'X-Foo'        => ['bar'],
@@ -143,7 +143,7 @@ class Psr7ServerRequestTest extends TestCase
         $method = 'PATCH';
 
         $body = fopen(__FILE__, 'r');
-
+        assert($body !== false);
         $headers = [
             'Host'         => ['example.com'],
             'X-Foo'        => ['bar'],
@@ -240,7 +240,7 @@ class Psr7ServerRequestTest extends TestCase
         $method = 'PATCH';
 
         $body = fopen(__FILE__, 'r');
-
+        assert($body !== false);
         $headers = [
             'Host'         => ['example.com'],
             'X-Foo'        => ['bar'],
@@ -398,12 +398,14 @@ class Psr7ServerRequestTest extends TestCase
      *     array<non-empty-string, string>,
      *     string,
      *     array<non-empty-string, string>,
-     *     mixed[],
-     *     mixed[],
+     *     array<array-key, mixed>,
+     *     array<array-key, mixed>
      * }>
      */
     public static function getResponseData(): array
     {
+        $body = file_get_contents(__FILE__);
+        assert($body !== false);
         return [
             [
                 'https://getlaminas.org/', // uri
@@ -430,7 +432,7 @@ class Psr7ServerRequestTest extends TestCase
                 'https://getlaminas.org/', // uri
                 'POST', // http method
                 ['Content-Type' => 'multipart/form-data'], // headers
-                file_get_contents(__FILE__), // body
+                $body, // body
                 ['foo' => 'bar'], // query params
                 [], // post
                 [
@@ -456,7 +458,7 @@ class Psr7ServerRequestTest extends TestCase
                 'https://getlaminas.org/', // uri
                 'POST', // http method
                 ['Content-Type' => 'multipart/form-data'], // headers
-                file_get_contents(__FILE__), // body
+                $body, // body
                 ['foo' => 'bar'], // query params
                 [], // post
                 [
