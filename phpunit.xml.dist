@@ -22,7 +22,7 @@
       <directory>./test</directory>
     </testsuite>
   </testsuites>
-  <source>
+  <source restrictDeprecations="true">
     <include>
       <directory suffix=".php">./src</directory>
     </include>
