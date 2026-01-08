@@ -14,6 +14,7 @@ use Laminas\Psr7Bridge\Psr7Response;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
 
+use function assert;
 use function sprintf;
 use function sys_get_temp_dir;
 use function tempnam;
@@ -55,7 +56,7 @@ final class Psr7ResponseTest extends TestCase
     /**
      * @dataProvider getResponseData
      * @psalm-param array<non-empty-string, array<array-key, string>|string> $headers
-    */
+     */
     public function testResponseToLaminas(string $body, int $status, array $headers): void
     {
         $stream = new Stream('php://temp', 'wb+');

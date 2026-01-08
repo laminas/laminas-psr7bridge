@@ -17,6 +17,7 @@ use Laminas\Stdlib\Parameters;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\UploadedFileInterface;
 
+use function assert;
 use function basename;
 use function count;
 use function file_get_contents;

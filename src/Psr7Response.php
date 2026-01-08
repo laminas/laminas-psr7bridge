@@ -8,6 +8,7 @@ use Laminas\Http\Headers;
 use Laminas\Http\Response as LaminasResponse;
 use Psr\Http\Message\ResponseInterface;
 
+use function assert;
 use function fopen;
 use function func_get_args;
 use function implode;
@@ -57,7 +58,7 @@ final class Psr7Response
         $body = new Stream('php://temp', 'wb+');
         $body->write($laminasResponse->getBody());
         /** @psalm-var array<non-empty-string, array<array-key, string>|string> $headers */
-        $headers=$laminasResponse->getHeaders()->toArray();
+        $headers = $laminasResponse->getHeaders()->toArray();
         return new Response(
             $body,
             $laminasResponse->getStatusCode(),

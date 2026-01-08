@@ -8,6 +8,7 @@ use Laminas\Stdlib\Parameters;
 use Psr\Http\Message\UriInterface;
 
 use function preg_replace;
+
 /**
  * @final
  */
@@ -19,12 +20,6 @@ class Request extends BaseRequest
      *
      * @param string $method
      * @param string|UriInterface $uri
-     * @param array $headers
-     * @param array $cookies
-     * @param array $queryStringArguments
-     * @param array $postParameters
-     * @param array $uploadedFiles
-     * @param array $serverParams
      */
     public function __construct(
         $method,
