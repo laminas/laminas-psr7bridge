@@ -205,7 +205,7 @@ final class Psr7ServerRequestTest extends TestCase
         $test = $laminasRequest->getFiles();
         $this->assertCount(1, $test);
         $this->assertTrue(isset($test['foo']));
-        $upload = $test->get('foo');
+        $upload = (array) $test->get('foo');
         $this->assertArrayHasKey('name', $upload);
         $this->assertArrayHasKey('type', $upload);
         $this->assertArrayHasKey('size', $upload);
@@ -302,7 +302,7 @@ final class Psr7ServerRequestTest extends TestCase
         $test = $laminasRequest->getFiles();
         $this->assertCount(1, $test);
         $this->assertTrue(isset($test['foo']));
-        $upload = $test->get('foo');
+        $upload = (array) $test->get('foo');
         $this->assertArrayHasKey('name', $upload);
         $this->assertEquals($upload['name'], '');
         $this->assertArrayHasKey('type', $upload);
