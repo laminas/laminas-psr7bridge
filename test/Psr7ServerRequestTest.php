@@ -14,6 +14,8 @@ use Laminas\Http\Request as LaminasRequest;
 use Laminas\Psr7Bridge\Laminas\Request as BridgeRequest;
 use Laminas\Psr7Bridge\Psr7ServerRequest;
 use Laminas\Stdlib\Parameters;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\RequiresPhp;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\UploadedFileInterface;
 
@@ -476,12 +478,12 @@ final class Psr7ServerRequestTest extends TestCase
     }
 
     /**
-     * @dataProvider getResponseData
      * @param array<non-empty-string, string> $headers
      * @param array<non-empty-string, string> $query
      * @param mixed[]                         $post
      * @param mixed[]                         $files
      */
+    #[DataProvider('getResponseData')]
     public function testFromLaminas(
         string $uri,
         string $method,
@@ -595,9 +597,7 @@ final class Psr7ServerRequestTest extends TestCase
         $this->assertSame($laminasRequest->getBaseUrl(), $converted->getBaseUrl());
     }
 
-    /**
-     * @requires PHP 7
-     */
+    #[RequiresPhp('>=7.0')]
     public function testPrivateConstruct()
     {
         $this->expectException(Error::class);

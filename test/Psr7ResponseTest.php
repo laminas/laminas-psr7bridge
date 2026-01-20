@@ -11,6 +11,8 @@ use Laminas\Diactoros\Stream;
 use Laminas\Http\Header\SetCookie;
 use Laminas\Http\Response as LaminasResponse;
 use Laminas\Psr7Bridge\Psr7Response;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\RequiresPhp;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
 
@@ -54,9 +56,9 @@ final class Psr7ResponseTest extends TestCase
     }
 
     /**
-     * @dataProvider getResponseData
      * @psalm-param array<non-empty-string, array<array-key, string>|string> $headers
      */
+    #[DataProvider('getResponseData')]
     public function testResponseToLaminas(string $body, int $status, array $headers): void
     {
         $stream = new Stream('php://temp', 'wb+');
@@ -79,9 +81,9 @@ final class Psr7ResponseTest extends TestCase
     }
 
     /**
-     * @dataProvider getResponseData
      * @psalm-param array<non-empty-string, array<array-key, string>|string> $headers
      */
+    #[DataProvider('getResponseData')]
     public function testResponseToLaminasWithMemoryStream(string $body, int $status, array $headers): void
     {
         $stream = new Stream('php://memory', 'wb+');
@@ -106,9 +108,9 @@ final class Psr7ResponseTest extends TestCase
     }
 
     /**
-     * @dataProvider getResponseData
      * @psalm-param array<non-empty-string, array<array-key, string>|string> $headers
      */
+    #[DataProvider('getResponseData')]
     public function testResponseToLaminasFromRealStream(string $body, int $status, array $headers): void
     {
         $tmpFile = tempnam(sys_get_temp_dir(), 'Test');
@@ -143,9 +145,8 @@ final class Psr7ResponseTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider getResponseString
-     */
+    #[DataProvider('getResponseString')]
+
     public function testResponseFromLaminas(string $response): void
     {
         $laminasResponse = LaminasResponse::fromString($response);
@@ -163,9 +164,8 @@ final class Psr7ResponseTest extends TestCase
         }
     }
 
-    /**
-     * @requires PHP 7
-     */
+    #[RequiresPhp('>=7.0')]
+
     public function testPrivateConstruct()
     {
         $this->expectException(Error::class);

@@ -1,28 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
-        backupGlobals="true"
-        bootstrap="vendor/autoload.php"
-        colors="true"
-        cacheDirectory=".phpunit.cache"
-        displayDetailsOnIncompleteTests="true"
-        displayDetailsOnSkippedTests="true"
-        displayDetailsOnTestsThatTriggerDeprecations="true"
-        displayDetailsOnTestsThatTriggerErrors="true"
-        displayDetailsOnTestsThatTriggerNotices="true"
-        displayDetailsOnTestsThatTriggerWarnings="true"
-        failOnDeprecation="true"
-        failOnWarning="true"
-        failOnNotice="true"
->
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd" backupGlobals="true" bootstrap="vendor/autoload.php" colors="true" cacheDirectory=".phpunit.cache" displayDetailsOnIncompleteTests="true" displayDetailsOnSkippedTests="true" displayDetailsOnTestsThatTriggerDeprecations="true" displayDetailsOnTestsThatTriggerErrors="true" displayDetailsOnTestsThatTriggerNotices="true" displayDetailsOnTestsThatTriggerWarnings="true" failOnDeprecation="true" failOnWarning="true" failOnNotice="true">
   <coverage/>
   <testsuites>
     <testsuite name="Laminas\\Psr7Bridge Tests">
       <directory>./test</directory>
     </testsuite>
   </testsuites>
-  <source restrictDeprecations="true">
+  <source ignoreIndirectDeprecations="true">
     <include>
       <directory suffix=".php">./src</directory>
     </include>
