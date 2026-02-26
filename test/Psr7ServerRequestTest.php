@@ -14,9 +14,12 @@ use Laminas\Http\Request as LaminasRequest;
 use Laminas\Psr7Bridge\Laminas\Request as BridgeRequest;
 use Laminas\Psr7Bridge\Psr7ServerRequest;
 use Laminas\Stdlib\Parameters;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\RequiresPhp;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\UploadedFileInterface;
 
+use function assert;
 use function basename;
 use function count;
 use function file_get_contents;
@@ -29,7 +32,7 @@ use function uniqid;
 use const UPLOAD_ERR_NO_FILE;
 use const UPLOAD_ERR_OK;
 
-class Psr7ServerRequestTest extends TestCase
+final class Psr7ServerRequestTest extends TestCase
 {
     public function testToLaminasWithShallowOmitsBody(): void
     {
@@ -53,7 +56,7 @@ class Psr7ServerRequestTest extends TestCase
         $method     = 'PATCH';
 
         $body = fopen(__FILE__, 'r');
-
+        assert($body !== false);
         $headers = [
             'Host'         => ['example.com'],
             'X-Foo'        => ['bar'],
@@ -143,7 +146,7 @@ class Psr7ServerRequestTest extends TestCase
         $method = 'PATCH';
 
         $body = fopen(__FILE__, 'r');
-
+        assert($body !== false);
         $headers = [
             'Host'         => ['example.com'],
             'X-Foo'        => ['bar'],
@@ -202,7 +205,7 @@ class Psr7ServerRequestTest extends TestCase
         $test = $laminasRequest->getFiles();
         $this->assertCount(1, $test);
         $this->assertTrue(isset($test['foo']));
-        $upload = $test->get('foo');
+        $upload = (array) $test->get('foo');
         $this->assertArrayHasKey('name', $upload);
         $this->assertArrayHasKey('type', $upload);
         $this->assertArrayHasKey('size', $upload);
@@ -240,7 +243,7 @@ class Psr7ServerRequestTest extends TestCase
         $method = 'PATCH';
 
         $body = fopen(__FILE__, 'r');
-
+        assert($body !== false);
         $headers = [
             'Host'         => ['example.com'],
             'X-Foo'        => ['bar'],
@@ -299,7 +302,7 @@ class Psr7ServerRequestTest extends TestCase
         $test = $laminasRequest->getFiles();
         $this->assertCount(1, $test);
         $this->assertTrue(isset($test['foo']));
-        $upload = $test->get('foo');
+        $upload = (array) $test->get('foo');
         $this->assertArrayHasKey('name', $upload);
         $this->assertEquals($upload['name'], '');
         $this->assertArrayHasKey('type', $upload);
@@ -398,12 +401,14 @@ class Psr7ServerRequestTest extends TestCase
      *     array<non-empty-string, string>,
      *     string,
      *     array<non-empty-string, string>,
-     *     mixed[],
-     *     mixed[],
+     *     array<array-key, mixed>,
+     *     array<array-key, mixed>
      * }>
      */
     public static function getResponseData(): array
     {
+        $body = file_get_contents(__FILE__);
+        assert($body !== false);
         return [
             [
                 'https://getlaminas.org/', // uri
@@ -430,7 +435,7 @@ class Psr7ServerRequestTest extends TestCase
                 'https://getlaminas.org/', // uri
                 'POST', // http method
                 ['Content-Type' => 'multipart/form-data'], // headers
-                file_get_contents(__FILE__), // body
+                $body, // body
                 ['foo' => 'bar'], // query params
                 [], // post
                 [
@@ -456,7 +461,7 @@ class Psr7ServerRequestTest extends TestCase
                 'https://getlaminas.org/', // uri
                 'POST', // http method
                 ['Content-Type' => 'multipart/form-data'], // headers
-                file_get_contents(__FILE__), // body
+                $body, // body
                 ['foo' => 'bar'], // query params
                 [], // post
                 [
@@ -473,12 +478,12 @@ class Psr7ServerRequestTest extends TestCase
     }
 
     /**
-     * @dataProvider getResponseData
      * @param array<non-empty-string, string> $headers
      * @param array<non-empty-string, string> $query
      * @param mixed[]                         $post
      * @param mixed[]                         $files
      */
+    #[DataProvider('getResponseData')]
     public function testFromLaminas(
         string $uri,
         string $method,
@@ -592,9 +597,7 @@ class Psr7ServerRequestTest extends TestCase
         $this->assertSame($laminasRequest->getBaseUrl(), $converted->getBaseUrl());
     }
 
-    /**
-     * @requires PHP 7
-     */
+    #[RequiresPhp('>=7.0')]
     public function testPrivateConstruct()
     {
         $this->expectException(Error::class);
